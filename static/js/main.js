@@ -98,7 +98,7 @@ const initTimelineScrollLock = () => {
         scroller.scrollHeight > scroller.clientHeight + 2;
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-    const lockOffset = 120;
+    const lockOffset = 180;
     let locked = false;
     let lockY = 0;
 
@@ -127,7 +127,8 @@ const initTimelineScrollLock = () => {
 
     const shouldLock = () => {
         const rect = section.getBoundingClientRect();
-        return rect.top <= lockOffset && rect.bottom >= lockOffset + 200;
+        const bottomThreshold = window.innerHeight - lockOffset;
+        return rect.top <= lockOffset && rect.bottom >= bottomThreshold;
     };
 
     const onWindowScroll = () => {
@@ -167,7 +168,7 @@ const initTimelineScrollLock = () => {
             const delta = event.deltaY;
             const maxScroll = scroller.scrollHeight - scroller.clientHeight;
             const atTop = scroller.scrollTop <= 1;
-            const atBottom = scroller.scrollTop >= maxScroll - 1;
+            const atBottom = scroller.scrollTop >= maxScroll - 2;
 
             if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
                 unlockScroll(delta < 0 ? "up" : "down");
@@ -175,11 +176,15 @@ const initTimelineScrollLock = () => {
             }
 
             event.preventDefault();
-            scroller.scrollTop = clamp(
+            const nextScroll = clamp(
                 scroller.scrollTop + delta * 0.32,
                 0,
                 maxScroll
             );
+            scroller.scrollTop = nextScroll;
+            if (delta > 0 && nextScroll >= maxScroll - 1) {
+                unlockScroll("down");
+            }
         },
         { passive: false }
     );
