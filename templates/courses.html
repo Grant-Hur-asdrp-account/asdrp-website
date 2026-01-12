@@ -54,4 +54,25 @@
         </tbody>
     </table>
 </div>
+
+{% set scored_courses = courses | selectattr("score") | list %}
+{% if scored_courses %}
+<section class="mt-5">
+    <h2 class="h4 mb-3">AP Exam Scores</h2>
+    <div class="row g-3">
+        {% for course in scored_courses %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="border rounded-4 p-3 bg-white shadow-sm h-100">
+                <div class="fw-semibold">{{ course.name }}</div>
+                <div class="text-muted small">{{ course.term }}</div>
+                <div class="display-6 fw-bold text-primary mt-2">{{ course.score }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <p class="text-muted small mt-3 mb-0">
+        Senior year exam scores post in July, so they're not listed yet.
+    </p>
+</section>
+{% endif %}
 {% endblock %}
