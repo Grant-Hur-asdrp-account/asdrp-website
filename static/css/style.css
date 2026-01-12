@@ -16,19 +16,16 @@ body {
 
 .js-enabled body {
     opacity: 0;
-    transform: translateY(8px);
 }
 
 .js-enabled body.page-loaded {
     opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition: opacity 0.4s ease;
 }
 
 .js-enabled body.page-exit {
     opacity: 0;
-    transform: translateY(6px);
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition: opacity 0.25s ease;
 }
 
 .hero-photo {
@@ -125,7 +122,6 @@ code {
 
     .js-enabled body {
         opacity: 1;
-        transform: none;
         transition: none;
     }
 
