@@ -1,6 +1,0 @@
-<svg width="600" height="320" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
-  <rect width="600" height="320" rx="32" fill="#fef3c7"/>
-  <circle cx="160" cy="160" r="70" fill="#f97316"/>
-  <path d="M260 120h220v30H260zM260 180h180v30H260z" fill="#92400e" opacity="0.6"/>
-  <text x="120" y="170" font-size="28" fill="#fff">🧘</text>
-</svg>

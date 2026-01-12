@@ -34,7 +34,7 @@ def inject_globals():
 
 @app.route("/")
 def home():
-    limited_courses = PORTFOLIO["courses"][:6]
+    limited_courses = PORTFOLIO["courses"][:4]
     return render_template(
         "home.html",
         courses=limited_courses,
