@@ -94,24 +94,19 @@ const initTimelineScrollLock = () => {
         return;
     }
 
-    let active = false;
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.target === section) {
-                    active = entry.isIntersecting;
-                }
-            });
-        },
-        { threshold: 0.6 }
-    );
+    const isScrollable = () =>
+        scroller.scrollHeight > scroller.clientHeight + 2;
 
-    observer.observe(section);
+    const isInView = () => {
+        const rect = section.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.25 &&
+            rect.bottom > window.innerHeight * 0.35;
+    };
 
     document.addEventListener(
         "wheel",
         (event) => {
-            if (!active) {
+            if (!isScrollable() || !isInView()) {
                 return;
             }
 
