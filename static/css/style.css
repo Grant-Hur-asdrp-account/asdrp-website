@@ -14,6 +14,17 @@ body {
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.js-enabled body {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.js-enabled body.page-loaded {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
 .hero-photo {
     max-width: min(360px, 80vw);
     width: 100%;
@@ -84,6 +95,12 @@ code {
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    .js-enabled body {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 
     .js-enabled [data-reveal] {
