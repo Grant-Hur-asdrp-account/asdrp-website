@@ -88,20 +88,6 @@ PORTFOLIO = {
                 ],
             },
             {
-                "title": "Low-Cost Air Quality Monitor",
-                "description": (
-                    "Designed and assembled a portable PM2.5 monitor with Python-based "
-                    "data logging and a responsive web dashboard."
-                ),
-                "technologies": ["Python", "Flask", "CircuitPython", "Tailwind"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/air-quality-monitor",
-                "image": "images/project-air-quality.svg",
-                "highlights": [
-                    "Rapid prototypes let us validate sensors with real outdoor readings.",
-                    "Documented calibration workflow for the next ASDRP cohort.",
-                ],
-            },
-            {
                 "title": "Project Deep Freezer",
                 "description": (
                     "Built a low-cost, done-and-documented freezer monitoring system that "
