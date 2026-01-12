@@ -12,7 +12,7 @@ PORTFOLIO = {
             "and innovative, mainly in Python."
         ),
         "tagline": "Student Researcher • Builder • Problem Solver",
-        "photo": "images/profile-placeholder.svg",  # Replace with your own photo
+        "photo": "images/profile.png",
         "resume_static_path": "documents/resume-placeholder.pdf",
         "email": "grant.hur@students.asdrp.org",
         "phone": "(555) 123-4567",
