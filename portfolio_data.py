@@ -184,7 +184,7 @@ PORTFOLIO = {
                     "for the next attempt."
                 ),
                 "technologies": ["Arcade 3", "Python"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/santafest-destiny",
+                "link": "https://github.com/gran4/RTSGameV2",
                 "image": "images/SantaFestDestiny.png",
                 "highlights": [
                     "Upgraded the engine to Arcade 3 in 2025 for smoother performance and better visuals.",
