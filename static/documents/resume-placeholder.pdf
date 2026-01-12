@@ -10,9 +10,17 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
 endobj
 4 0 obj
-<< /Length 73 >>
+<< /Length 279 >>
 stream
-BT /F1 24 Tf 72 720 Td (Replace this with your resume PDF) Tj ET
+BT /F1 18 Tf 64 740 Td (Grant Hur) Tj ET
+BT /F1 12 Tf 64 710 Td (Senior at The King's Academy | Student Researcher) Tj ET
+BT /F1 12 Tf 64 670 Td (ASDRP Mobile App: Built personalized todo/forms modules and profile explorer to declutter lab comms.) Tj ET
+BT /F1 12 Tf 64 640 Td (Project Deep Freezer: Implemented EasyOCR testing and ROI UI for freezer monitoring alerts.) Tj ET
+BT /F1 12 Tf 64 610 Td (SantaFest Destiny: Arcade 3 roguelite RTS with procedural islands and persistent upgrades.) Tj ET
+BT /F1 12 Tf 64 580 Td (AI-InvestiBot: Experimental LSTM framework with walk-forward validation.) Tj ET
+BT /F1 12 Tf 64 540 Td (Skills: Python, Swift, Flask, Firebase, PyTorch, Circuit design, Technical writing.) Tj ET
+BT /F1 12 Tf 64 510 Td (Contact: gran4@github | grant.hur@students.asdrp.org) Tj ET
+BT /F1 10 Tf 64 470 Td (Replace this placeholder with a full resume PDF when ready.) Tj ET
 endstream
 endobj
 5 0 obj
@@ -22,12 +30,12 @@ xref
 0 6
 0000000000 65535 f 
 0000000010 00000 n 
-0000000053 00000 n 
-0000000105 00000 n 
-0000000260 00000 n 
-0000000370 00000 n 
+0000000055 00000 n 
+0000000107 00000 n 
+0000000263 00000 n 
+0000000301 00000 n 
 trailer
 << /Size 6 /Root 1 0 R >>
 startxref
-456
+348
 %%EOF
