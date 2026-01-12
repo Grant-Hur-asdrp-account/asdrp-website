@@ -18,6 +18,7 @@ PORTFOLIO = {
         "phone": "(555) 123-4567",
         "socials": {
             "GitHub": "https://github.com/gran4",
+            "ASDRP GitHub": "https://github.com/Grant-Hur-asdrp-account",
             "LinkedIn": "https://www.linkedin.com/feed/",
         },
     },
