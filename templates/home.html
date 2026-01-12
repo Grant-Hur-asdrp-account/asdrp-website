@@ -51,25 +51,27 @@
             </a>
         </div>
     </div>
-    <article class="row g-4 align-items-stretch">
-        <div class="col-12 col-lg-6" data-reveal>
-            <div class="card h-100 shadow-sm featured-card">
-                <img
-                    src="{{ url_for('static', filename=featured_project.image) }}"
-                    class="card-img-top project-image featured-image"
-                    alt="{{ featured_project.title }} preview"
-                />
-            </div>
-        </div>
-        <div class="col-12 col-lg-6" data-reveal>
-            <div class="p-4 border rounded-4 h-100 bg-white shadow-sm">
-                <p class="text-muted">{{ featured_project.description }}</p>
-                <div class="mb-3">
-                    {% for tech in featured_project.technologies %}
-                    <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
-                    {% endfor %}
+    <article class="featured-wrap shadow-sm" data-reveal>
+        <div class="row g-4 align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="featured-media">
+                    <img
+                        src="{{ url_for('static', filename=featured_project.image) }}"
+                        class="project-image featured-image"
+                        alt="{{ featured_project.title }} preview"
+                    />
                 </div>
-                <span class="badge text-bg-secondary">Internal ASDRP project</span>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="featured-copy">
+                    <p class="text-muted">{{ featured_project.description }}</p>
+                    <div class="mb-3">
+                        {% for tech in featured_project.technologies %}
+                        <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <span class="badge text-bg-secondary">Internal ASDRP project</span>
+                </div>
             </div>
         </div>
     </article>
