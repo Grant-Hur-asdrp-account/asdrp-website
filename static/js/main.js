@@ -102,23 +102,26 @@ const initTimelineScrollLock = () => {
     let locked = false;
     let released = false;
     let lockY = 0;
+    let lastScrollY = window.scrollY;
 
-    const isInView = () => {
-        const rect = section.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
+    const getBounds = () => {
+        const sectionTop = section.offsetTop;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        return { sectionTop, sectionBottom };
     };
 
-    const shouldLock = () => {
-        const rect = section.getBoundingClientRect();
-        return rect.top <= lockOffset && rect.bottom >= lockOffset + 200;
+    const isWithinZone = (scrollY) => {
+        const { sectionTop, sectionBottom } = getBounds();
+        const lockPoint = scrollY + lockOffset;
+        return lockPoint >= sectionTop && lockPoint <= sectionBottom;
     };
 
     const lockScroll = () => {
         if (locked) {
             return;
         }
-        const rect = section.getBoundingClientRect();
-        lockY = window.scrollY + rect.top - lockOffset;
+        const { sectionTop } = getBounds();
+        lockY = sectionTop - lockOffset;
         window.scrollTo(0, lockY);
         locked = true;
     };
@@ -135,12 +138,34 @@ const initTimelineScrollLock = () => {
         if (!isScrollable()) {
             return;
         }
-        if (released && !isInView()) {
-            released = false;
+        const currentY = window.scrollY;
+
+        if (released) {
+            if (!isWithinZone(currentY)) {
+                released = false;
+            }
+            lastScrollY = currentY;
+            return;
         }
-        if (!locked && !released && shouldLock()) {
-            lockScroll();
+
+        if (!locked) {
+            const { sectionTop, sectionBottom } = getBounds();
+            const wasAbove = lastScrollY + lockOffset < sectionTop;
+            const wasBelow = lastScrollY + lockOffset > sectionBottom;
+            const nowWithin = isWithinZone(currentY);
+            const crossedDown = wasAbove && nowWithin;
+            const crossedUp = wasBelow && nowWithin;
+
+            if (crossedDown || crossedUp) {
+                lockScroll();
+            }
         }
+
+        if (locked && currentY !== lockY) {
+            window.scrollTo(0, lockY);
+        }
+
+        lastScrollY = currentY;
     };
 
     window.addEventListener("scroll", onWindowScroll, { passive: true });
@@ -156,7 +181,7 @@ const initTimelineScrollLock = () => {
                 return;
             }
 
-            if (!shouldLock() && !locked) {
+            if (!locked) {
                 return;
             }
 
@@ -184,6 +209,9 @@ const initTimelineScrollLock = () => {
                 0,
                 maxScroll
             );
+            if (window.scrollY !== lockY) {
+                window.scrollTo(0, lockY);
+            }
         },
         { passive: false }
     );
