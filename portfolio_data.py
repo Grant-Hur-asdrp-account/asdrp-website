@@ -118,7 +118,7 @@ PORTFOLIO = {
             {
                 "title": "STEM Outreach Portal",
                 "description": (
-                    "Built a resource hub for local students to discover research programs, "
+                    "Built a resource hub for students to discover research programs, "
                     "complete with search, bookmarking, and newsletter automation."
                 ),
                 "technologies": ["React", "Firebase", "SendGrid"],
@@ -126,14 +126,22 @@ PORTFOLIO = {
                 "image": "images/project-portal.svg",
             },
             {
-                "title": "Smart Habit Tracker",
+                "title": "SantaFest Destiny",
                 "description": (
-                    "A cross-platform tracker that syncs with wearables and uses "
-                    "lightweight ML to nudge better routines."
+                    "A fast-paced real-time strategy game about building Santa's workshop "
+                    "across procedurally generated snowy islands while meeting gift quotas "
+                    "and surviving child raids. Each failed run feeds permanent upgrades "
+                    "for the next attempt."
                 ),
-                "technologies": ["Flutter", "Firebase", "Python"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/habit-tracker",
-                "image": "images/project-habits.svg",
+                "technologies": ["Arcade 3", "Python"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/santafest-destiny",
+                "image": "images/project-santafest.png",
+                "highlights": [
+                    "Upgraded the engine to Arcade 3 in 2025 for smoother performance and better visuals.",
+                    "Iterated on adjustable game speed, save system, and permanent progression UI.",
+                    "Started in a middle-school elective and kept expanding through self-study.",
+                ],
+                "status_note": "Actively maintained hobby project with ongoing content updates.",
             },
         ],
     },
