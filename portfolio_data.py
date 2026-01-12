@@ -93,31 +93,6 @@ PORTFOLIO = {
             "term": "12th Grade",
             "topics": ["Global Perspectives", "Essay Writing"],
         },
-        {
-            "name": "ASDRP Research Fellowship",
-            "term": "2024-2025",
-            "topics": ["iOS Mobile Development", "Electronics", "Technical Writing"],
-            "description": (
-                "A year-long independent study at ASDRP focused on building polished "
-                "prototypes and documenting each iteration from proposal to poster."
-            ),
-            "projects": [
-                {
-                    "title": "ASDRP Mobile App",
-                    "summary": (
-                        "Centralized to-do lists, profile explorer, and attendance system "
-                        "to reduce program communication overload."
-                    ),
-                },
-                {
-                    "title": "Project Deep Freezer",
-                    "summary": (
-                        "Raspberry Pi + OCR monitoring system that sends alerts when "
-                        "ultra-low freezers drift out of range."
-                    ),
-                },
-            ],
-        },
     ],
     "projects": {
         "asdrp": [
