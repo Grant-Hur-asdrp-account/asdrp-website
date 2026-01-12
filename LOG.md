@@ -80,3 +80,41 @@
 - **What I Learned**: Treat downloads and layout polish as first-class features.
   Capturing thought process/resources/challenges right after each milestone
   keeps this journal accurate for the assignment.
+
+## 2025-01-14 &mdash; Later Updates
+
+### Layout & Navigation Adjustments
+- **Timeline**: Reworked the home page into a scrollytelling overview, then
+  trimmed it back to a single featured ASDRP project plus courses/interests
+  preview. Restored the hero buttons to “About Me” + “Contact”, removed “case
+  study” wording, and added a lab group button pointing to the ASDRP Google Site.
+- **Thought Process**: Wanted a modern scroll flow but kept the home page light
+  so visitors can reach dedicated pages quickly. The featured project gives a
+  strong entry point without overwhelming the homepage.
+- **Challenges**: The scroll progress bar disappeared behind the sticky nav; fixed
+  by boosting z-index and later removing body transforms that broke fixed
+  positioning.
+- **What I Learned**: Small hero CTA tweaks have big impact on first impressions,
+  so it’s worth iterating quickly and keeping the action choices minimal.
+
+### Interactions & Motion
+- **Timeline**: Added GSAP ScrollTrigger reveals and a top scroll progress bar
+  on the home page. Implemented global page enter/exit transitions and refined
+  them after they interfered with the fixed progress bar.
+- **Thought Process**: Subtle motion should guide attention without feeling
+  flashy. Using GSAP only on the home page keeps other pages lightweight.
+- **Challenges**: Page exit transitions initially used a body translate which
+  broke fixed-position elements; solved by switching to opacity-only transitions.
+- **What I Learned**: Fixed elements and transforms don’t mix; keep transforms on
+  inner containers if a fixed overlay is required.
+
+### Visual Tweaks & Content Cleanup
+- **Timeline**: Unified the featured project image and description into a single
+  rounded white card with beveled edges. Tuned project thumbnail framing until
+  it felt right. Removed unused placeholder images from `static/images`.
+- **Thought Process**: A single card reads cleaner and more modern than two
+  separate blocks; subtle bevels keep it premium without extra color noise.
+- **Challenges**: Achieving the right “zoom” required multiple CSS passes; kept
+  final settings as `object-fit: contain` with controlled padding.
+- **What I Learned**: Visual polish often depends on small spacing decisions, so
+  it helps to compare before/after screenshots during tweaks.
