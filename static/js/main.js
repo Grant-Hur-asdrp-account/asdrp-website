@@ -103,6 +103,24 @@ const initTimelineScrollLock = () => {
             rect.bottom > window.innerHeight * 0.55;
     };
 
+    let targetScroll = scroller.scrollTop;
+    let rafId = null;
+
+    const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+    const animateScroll = () => {
+        const current = scroller.scrollTop;
+        const diff = targetScroll - current;
+        if (Math.abs(diff) < 0.5) {
+            scroller.scrollTop = targetScroll;
+            rafId = null;
+            return;
+        }
+
+        scroller.scrollTop = current + diff * 0.2;
+        rafId = window.requestAnimationFrame(animateScroll);
+    };
+
     document.addEventListener(
         "wheel",
         (event) => {
@@ -125,10 +143,11 @@ const initTimelineScrollLock = () => {
             }
 
             event.preventDefault();
-            const speed = 0.12;
-            const maxStep = 60;
-            const step = Math.max(-maxStep, Math.min(maxStep, delta * speed));
-            scroller.scrollBy({ top: step, left: 0, behavior: "auto" });
+            const maxScroll = scroller.scrollHeight - scroller.clientHeight;
+            targetScroll = clamp(targetScroll + delta * 0.24, 0, maxScroll);
+            if (!rafId) {
+                rafId = window.requestAnimationFrame(animateScroll);
+            }
         },
         { passive: false }
     );
