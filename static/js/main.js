@@ -99,35 +99,11 @@ const initTimelineScrollLock = () => {
 
     const isInView = () => {
         const rect = section.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        return center > window.innerHeight * 0.2 &&
-            center < window.innerHeight * 0.8;
+        const mid = window.innerHeight / 2;
+        return rect.top < mid && rect.bottom > mid;
     };
-
-    let targetScroll = scroller.scrollTop;
-    let rafId = null;
-    let released = false;
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-    const animateScroll = () => {
-        const current = scroller.scrollTop;
-        const diff = targetScroll - current;
-        if (Math.abs(diff) < 0.5) {
-            scroller.scrollTop = targetScroll;
-            rafId = null;
-            return;
-        }
-
-        scroller.scrollTop = current + diff * 0.2;
-        rafId = window.requestAnimationFrame(animateScroll);
-    };
-
-    scroller.addEventListener("scroll", () => {
-        if (!rafId) {
-            targetScroll = scroller.scrollTop;
-        }
-    });
 
     document.addEventListener(
         "wheel",
@@ -141,33 +117,24 @@ const initTimelineScrollLock = () => {
             }
 
             if (!isInView()) {
-                released = false;
-                return;
-            }
-
-            if (released) {
                 return;
             }
 
             const delta = event.deltaY;
-            const atTop = scroller.scrollTop <= 0;
-            const atBottom =
-                scroller.scrollTop + scroller.clientHeight >=
-                scroller.scrollHeight - 1;
+            const maxScroll = scroller.scrollHeight - scroller.clientHeight;
+            const atTop = scroller.scrollTop <= 1;
+            const atBottom = scroller.scrollTop >= maxScroll - 1;
 
             if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
-                targetScroll = scroller.scrollTop;
-                rafId = null;
-                released = true;
                 return;
             }
 
             event.preventDefault();
-            const maxScroll = scroller.scrollHeight - scroller.clientHeight;
-            targetScroll = clamp(targetScroll + delta * 0.32, 0, maxScroll);
-            if (!rafId) {
-                rafId = window.requestAnimationFrame(animateScroll);
-            }
+            scroller.scrollTop = clamp(
+                scroller.scrollTop + delta * 0.35,
+                0,
+                maxScroll
+            );
         },
         { passive: false }
     );
