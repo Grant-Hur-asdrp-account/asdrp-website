@@ -69,7 +69,7 @@ PORTFOLIO = {
                     "emails, calendars, and attendance tools into one personalized feed."
                 ),
                 "technologies": ["Swift", "Firebase Auth", "Firestore", "Kotlin (planned)"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/asdrp-mobile-app",
+                "link": None,
                 "image": "images/asdrp-mobile-app.png",
                 "highlights": [
                     "Implemented the to-do list + important forms modules so every student sees actionable tasks by due date.",
@@ -95,7 +95,7 @@ PORTFOLIO = {
                     "displays and raise PagerDuty alerts when anything drifts out of range."
                 ),
                 "technologies": ["Raspberry Pi", "OpenCV", "EasyOCR", "PagerDuty"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/project-deep-freezer",
+                "link": None,
                 "image": "images/project-deep-freezer.png",
                 "highlights": [
                     "Analyzed failure stories to articulate the risk (lost samples worth years of work).",

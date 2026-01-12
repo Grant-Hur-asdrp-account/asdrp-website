@@ -48,9 +48,13 @@
                     <p class="small text-uppercase fw-semibold text-primary mb-2">
                         {{ project.technologies|join(", ") }}
                     </p>
+                    {% if project.link %}
                     <a class="btn btn-outline-primary btn-sm" href="{{ project.link }}" target="_blank">
                         View project
                     </a>
+                    {% else %}
+                    <span class="badge text-bg-secondary">Internal ASDRP project</span>
+                    {% endif %}
                 </div>
             </div>
         </article>

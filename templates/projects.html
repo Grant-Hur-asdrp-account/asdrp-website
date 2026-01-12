@@ -74,9 +74,13 @@
                         <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
                         {% endfor %}
                     </div>
+                    {% if project.link %}
                     <a class="btn btn-outline-primary btn-sm" href="{{ project.link }}" target="_blank">
                         View on GitHub
                     </a>
+                    {% else %}
+                    <span class="badge text-bg-secondary">Internal ASDRP project</span>
+                    {% endif %}
                 </div>
             </div>
         </article>
