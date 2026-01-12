@@ -80,9 +80,8 @@ const initTimelineHighlight = () => {
 };
 
 const initTimelineScrollLock = () => {
-    const section = document.querySelector("#timeline");
     const scroller = document.querySelector("[data-timeline-scroll]");
-    if (!section || !scroller) {
+    if (!scroller) {
         return;
     }
 
@@ -94,41 +93,26 @@ const initTimelineScrollLock = () => {
         return;
     }
 
-    const isScrollable = () =>
-        scroller.scrollHeight > scroller.clientHeight + 2;
+    const onWheel = (event) => {
+        if (event.ctrlKey || event.metaKey) {
+            return;
+        }
 
-    const isInView = () => {
-        const rect = section.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.25 &&
-            rect.bottom > window.innerHeight * 0.35;
+        const delta = event.deltaY;
+        const atTop = scroller.scrollTop <= 0;
+        const atBottom =
+            scroller.scrollTop + scroller.clientHeight >=
+            scroller.scrollHeight - 1;
+
+        if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
+            return;
+        }
+
+        event.preventDefault();
+        scroller.scrollBy({ top: delta * 0.6, left: 0, behavior: "auto" });
     };
 
-    document.addEventListener(
-        "wheel",
-        (event) => {
-            if (!isScrollable() || !isInView()) {
-                return;
-            }
-
-            if (event.ctrlKey || event.metaKey) {
-                return;
-            }
-
-            const delta = event.deltaY;
-            const atTop = scroller.scrollTop <= 0;
-            const atBottom =
-                scroller.scrollTop + scroller.clientHeight >=
-                scroller.scrollHeight - 1;
-
-            if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
-                return;
-            }
-
-            event.preventDefault();
-            scroller.scrollBy({ top: delta, left: 0 });
-        },
-        { passive: false }
-    );
+    scroller.addEventListener("wheel", onWheel, { passive: false });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
