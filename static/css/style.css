@@ -71,6 +71,76 @@ body {
     padding: 0.5rem 0.25rem;
 }
 
+.timeline {
+    position: relative;
+    margin-left: 0.5rem;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(15, 23, 42, 0.12);
+}
+
+.timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 1.5rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 0.3rem;
+    top: 0.35rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.18);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.timeline-item.is-active .timeline-marker {
+    background: #0ea5e9;
+    transform: scale(1.1);
+}
+
+.timeline-meta {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: rgba(15, 23, 42, 0.6);
+    margin-bottom: 0.25rem;
+}
+
+.timeline-image {
+    border-radius: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 0.75rem;
+    background: #f8fafc;
+}
+
+.timeline-image img {
+    width: 100%;
+    display: block;
+    max-height: 220px;
+    object-fit: contain;
+}
+
+@media (min-width: 992px) {
+    .timeline-item {
+        padding-left: 2rem;
+    }
+
+    .timeline-image img {
+        max-height: 260px;
+    }
+}
+
 .interest-card {
     background-color: white;
     box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);

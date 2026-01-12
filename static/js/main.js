@@ -52,6 +52,34 @@ const initRevealAnimations = () => {
     items.forEach((item) => observer.observe(item));
 };
 
+const initTimelineHighlight = () => {
+    const items = Array.from(document.querySelectorAll("[data-timeline]"));
+    if (items.length === 0) {
+        return;
+    }
+
+    const setActive = (target) => {
+        items.forEach((item) => {
+            item.classList.toggle("is-active", item === target);
+        });
+    };
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActive(entry.target);
+                }
+            });
+        },
+        { rootMargin: "-10% 0px -55% 0px", threshold: 0.1 }
+    );
+
+    items.forEach((item) => observer.observe(item));
+    setActive(items[0]);
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     initRevealAnimations();
+    initTimelineHighlight();
 });

@@ -210,4 +210,54 @@ PORTFOLIO = {
         "Soccer",
         "Community STEM mentorship",
     ],
+    "milestones": [
+        {
+            "year": "2008",
+            "title": "Born",
+            "detail": "May 22, 2008",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "5th Grade",
+            "title": "First coding curiosity",
+            "detail": "Started exploring basic programming concepts.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "6th Grade",
+            "title": "First game build",
+            "detail": "Built a game for an elective class and kept iterating on it.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "8th Grade",
+            "title": "Basketball tournament win",
+            "detail": "Won a 3-person team tournament and kept the teamwork mindset.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "9th Grade",
+            "title": "GitHub launch",
+            "detail": "Started publishing code and tracking projects on GitHub.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "10th Grade",
+            "title": "AI-InvestiBot begins",
+            "detail": "Started my experimental ML stock modeling framework.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "Summer after 10th",
+            "title": "Joined ASDRP",
+            "detail": "Began lab research focused on real-world engineering problems.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
+            "year": "12th Grade",
+            "title": "Now",
+            "detail": "Building the portfolio and current research projects.",
+            "image": "images/milestone-placeholder.svg",
+        },
+    ],
 }

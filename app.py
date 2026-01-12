@@ -40,6 +40,7 @@ def home():
         courses=limited_courses,
         interests=PORTFOLIO["interests"],
         featured_project=PORTFOLIO["projects"]["asdrp"][0],
+        milestones=PORTFOLIO["milestones"],
     )
 
 
