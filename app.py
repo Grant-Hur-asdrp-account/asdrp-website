@@ -38,7 +38,7 @@ def home():
     highlighted_projects = (
         PORTFOLIO["projects"]["asdrp"][:2]
         + PORTFOLIO["projects"]["personal"][:2]
-    )[:2]
+    )[:4]
     return render_template(
         "home.html",
         courses=limited_courses,

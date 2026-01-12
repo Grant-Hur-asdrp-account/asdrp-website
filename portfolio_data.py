@@ -69,7 +69,39 @@ PORTFOLIO = {
                 "technologies": ["Python", "Flask", "CircuitPython", "Tailwind"],
                 "link": "https://github.com/Grant-Hur-asdrp-account/air-quality-monitor",
                 "image": "images/project-air-quality.svg",
+                "highlights": [
+                    "Rapid prototypes let us validate sensors with real outdoor readings.",
+                    "Documented calibration workflow for the next ASDRP cohort.",
+                ],
             },
+            {
+                "title": "Project Deep Freezer",
+                "description": (
+                    "Built a low-cost, done-and-documented freezer monitoring system that "
+                    "uses a Raspberry Pi camera and OCR to read ultra-low temperature "
+                    "displays and raise PagerDuty alerts when anything drifts out of range."
+                ),
+                "technologies": ["Raspberry Pi", "OpenCV", "Tesseract OCR", "PagerDuty"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/project-deep-freezer",
+                "image": "images/project-deep-freezer.png",
+                "highlights": [
+                    "Analyzed failure stories to articulate the risk (lost samples worth years of work).",
+                    "Implemented automated unit tests for the OCR pipeline to reduce false alarms.",
+                    "Built the UI for selecting the region of interest so the camera zooms on the correct digits.",
+                ],
+                "status_note": "Project is done and ready for extended lab testing; accuracy still depends on lighting/placement.",
+                "strengths": [
+                    "Low cost—no subscriptions or vendor lock-in.",
+                    "Installs without probes or freezer modifications.",
+                    "Works with most freezers by reading the native display.",
+                ],
+                "limitations": [
+                    "Relies on the freezer's built-in display staying readable.",
+                    "Needs stable power/network and good lighting for OCR.",
+                ],
+            },
+        ],
+        "personal": [
             {
                 "title": "STEM Outreach Portal",
                 "description": (
@@ -80,8 +112,6 @@ PORTFOLIO = {
                 "link": "https://github.com/Grant-Hur-asdrp-account/stem-portal",
                 "image": "images/project-portal.svg",
             },
-        ],
-        "personal": [
             {
                 "title": "Smart Habit Tracker",
                 "description": (
@@ -91,16 +121,6 @@ PORTFOLIO = {
                 "technologies": ["Flutter", "Firebase", "Python"],
                 "link": "https://github.com/Grant-Hur-asdrp-account/habit-tracker",
                 "image": "images/project-habits.svg",
-            },
-            {
-                "title": "Meditation Timer for iOS",
-                "description": (
-                    "SwiftUI app focused on minimalism with haptics, live activities, "
-                    "and wind-down reminders."
-                ),
-                "technologies": ["SwiftUI", "Core Data"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/meditation-timer",
-                "image": "images/project-meditation.svg",
             },
         ],
     },
