@@ -13,7 +13,9 @@
   HTML strings. For the hero, borrow familiar conventions: GitHub-style heading
   structure with a left-aligned description, right-aligned profile photo, and
   keyword chips similar to tags on GitHub/itch.io project pages so recruiters
-  can scan important terms (AI, Flask, Swift, etc.).
+  can scan important terms (AI, Flask, Swift, etc.). The blue/white palette felt
+  familiar from other tech portfolios—it stays minimal yet modern without drawing
+  attention away from the content.
 - **Resources Used**: Flask documentation (routing/context processors), Bootstrap
   5 navbar + hero examples, Flask-WTF quickstart for CSRF/validation patterns.
 - **Challenges**: Realized `request` isn’t automatically available in templates;
