@@ -129,7 +129,7 @@ PORTFOLIO = {
                     "department, lab, and current deadlines. It consolidates scattered "
                     "emails, calendars, and attendance tools into one personalized feed."
                 ),
-                "technologies": ["Swift", "Firebase Auth", "Firestore", "Kotlin (planned)"],
+                "technologies": ["Swift", "Firebase Auth", "Firestore"],
                 "link": None,
                 "image": "images/asdrp-mobile-app.png",
                 "highlights": [
