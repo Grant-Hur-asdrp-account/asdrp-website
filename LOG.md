@@ -3,51 +3,72 @@
 ## 2025-01-14 &mdash; Build Day
 
 ### Morning: Foundations
-- Initialized the Flask project, created `.venv`, installed Flask/Flask-WTF,
-  and scaffolded `app.py` with route stubs plus `portfolio_data.py` to centralize
-  content (bio, placeholder courses/projects/interests).
-- Added Bootstrap-based `base.html` and hero layout, then wired new templates
-  (home, about, courses, projects, resume, contact) to render via
-  `render_template`. Logged decisions about keeping HTML in templates instead of
-  `render_template_string`.
-- Created `forms.py` with a `ContactForm` and ensured submissions append to
-  `contact_submissions.log`. Added `.gitignore` entries for logs, `.venv/`, and
-  `.DS_Store`.
+- **Timeline**: Initialized the Flask repo, created `.venv`, installed
+  Flask/Flask-WTF, scaffolded `app.py`, `portfolio_data.py`, and the key
+  templates (home/about/courses/projects/resume/contact). Added `forms.py` plus
+  `.gitignore` rules for `.venv`, logs, and `.DS_Store`.
+- **Thought Process**: Keep all editable content in `portfolio_data.py` so I can
+  tweak the site later without touching templates. Use Bootstrap to get a
+  responsive layout quickly and stick to proper template files instead of inline
+  HTML strings.
+- **Resources Used**: Flask documentation (routing/context processors), Bootstrap
+  5 navbar + hero examples, Flask-WTF quickstart for CSRF/validation patterns.
+- **Challenges**: Realized `request` isn’t automatically available in templates;
+  fixed it by adding an `@app.context_processor` that injects nav links and
+  metadata.
+- **What I Learned**: Designing the `PORTFOLIO` data structure first makes the
+  rest of the build smoother. WTForms saves time even for simple contact forms.
 
 ### Midday: Deployment + Assets
-- Installed `gunicorn`, updated `requirements.txt`, and pushed the repo to
-  `Grant-Hur-asdrp-account/asdrp-website`. Swapped the Git remote to the
-  `github-asdrp` SSH alias by editing `.git/config` (initial commands failed due
-  to permission issues). Render deployment succeeded with `gunicorn app:app`.
-- Added placeholder SVGs (profile, generic project art) under `static/images`,
-  plus a template `static/documents/README` for the resume. Captured the process
-  in this log per assignment instructions.
-- Hooked in real assets when available: `profile.png`, `asdrp-mobile-app.png`,
-  `project-deep-freezer.png`, `SantaFestDestiny.png`, and `AI-Investibot.png`.
+- **Timeline**: Installed `gunicorn`, updated `requirements.txt`, pushed to
+  GitHub, edited `.git/config` manually to switch the remote to the
+  `github-asdrp` SSH alias (CLI command couldn’t lock the file), and deployed on
+  Render with `gunicorn app:app`. Added placeholder SVGs/images and a resume
+  README under `static/`.
+- **Thought Process**: Wanted the Render URL live early to test on phones and
+  meet the “public deployment” requirement. Using separate SSH aliases prevents
+  mixing personal vs ASDRP GitHub credentials.
+- **Resources Used**: Render Python quickstart, Git remote documentation, quick
+  SVG snippets for temp artwork.
+- **Challenges**: `git remote set-url` failed with “could not lock config”; solved
+  by editing `.git/config` manually. Render deployed successfully on the first
+  build.
+- **What I Learned**: Keep deploy commands minimal so troubleshooting is easy.
+  Shipping placeholder assets avoids broken layouts while waiting for real media.
 
 ### Afternoon: Content & Case Studies
-- Documented two ASDRP projects (Mobile App + Project Deep Freezer) with
-  strengths, limitations, highlights, and internal-only badges when links are
-  private. Added personal projects SantaFest (repo `gran4/RTSGameV2`) and
-  AI-InvestiBot (repo `gran4/AI-InvestiBot`), moving STEM Outreach off the list.
-- Rebuilt the courses array with every AP class, grade level, and `score`
-  attributes; created an “AP Exam Scores” grid on the courses page so exam
-  results stand apart. Flagged senior-year scores as pending to avoid implying
-  results exist.
-- Tweaked project image CSS repeatedly to balance “see the whole mockup” vs.
-  “fill the card”. Final setting: `object-fit: contain`, `max-height: 250px`,
-  light padding.
-- Added dual social links (personal GitHub `gran4` plus `Grant-Hur-asdrp-account`,
-  LinkedIn) and swapped bios to mention The King’s Academy + accurate contact
-  emails.
+- **Timeline**: Wrote detailed entries for ASDRP Mobile App and Project Deep
+  Freezer (strengths/limitations/internal badges). Added personal projects
+  SantaFest (`gran4/RTSGameV2`) and AI-InvestiBot (`gran4/AI-InvestiBot`), updated
+  bios, dual GitHub links, and contact info. Rebuilt the AP course list with
+  grade levels + scores and added an AP Exam Scores grid. Tweaked project image
+  CSS repeatedly until the framing felt right.
+- **Thought Process**: Split ASDRP vs personal work so it’s obvious which code is
+  private/internal and which lives on GitHub. Highlight AP exam success with a
+  dedicated score section instead of hiding it in text.
+- **Resources Used**: My own GitHub repos for accurate descriptions, College
+  Board course info for terminology, Bootstrap grid utilities for the score
+  layout.
+- **Challenges**: Project thumbnails either over- or under-cropped; iterated on
+  `object-fit`, `max-height`, and padding to get a light zoom without losing
+  context.
+- **What I Learned**: Listing strengths + limitations makes each project read
+  like a case study. Internal projects need badges instead of dead “View on
+  GitHub” buttons.
 
 ### Evening: Polish + Placeholder Resume
-- Footer floated mid-page on short routes, so `base.html` now uses
-  `d-flex flex-column min-vh-100` with `main.flex-grow-1`, pinning the footer to
-  the bottom everywhere.
-- Wrote a filler PDF at `static/documents/resume-placeholder.pdf` summarizing
-  major projects/skills so the download button works until the real resume is
-  ready.
-- Recorded lessons learned: centralize content early, double-check image framing
-  on every viewport, and keep this journal updated after each milestone so the
-  assignment requirement is met.
+- **Timeline**: Converted `base.html` to use `d-flex flex-column min-vh-100`
+  with `main.flex-grow-1` so the footer stays pinned at the bottom. Authored a
+  temporary resume PDF summarizing core projects/skills/contact info and placed
+  it at `static/documents/resume-placeholder.pdf`. Updated this log accordingly.
+- **Thought Process**: Short pages looked awkward without a pinned footer, so
+  flexbox fixes the layout. Even a temporary resume should provide substance so
+  visitors aren’t left with an empty download.
+- **Resources Used**: Bootstrap flex utilities, a simple PDF text template
+  (Helvetica + coordinates) for the filler resume.
+- **Challenges**: Footer change meant reorganizing the entire body structure;
+  solved by wrapping `<body>` in a flex column. Needed multiple passes on the
+  PDF to tighten copy and fix typos before committing.
+- **What I Learned**: Treat downloads and layout polish as first-class features.
+  Capturing thought process/resources/challenges right after each milestone
+  keeps this journal accurate for the assignment.
