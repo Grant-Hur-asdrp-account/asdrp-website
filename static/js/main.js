@@ -104,7 +104,7 @@ const initTimelineScrollLock = () => {
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-    document.addEventListener(
+    window.addEventListener(
         "wheel",
         (event) => {
             if (!isScrollable()) {
@@ -119,6 +119,10 @@ const initTimelineScrollLock = () => {
                 return;
             }
 
+            if (!event.cancelable) {
+                return;
+            }
+
             const delta = event.deltaY;
             const maxScroll = scroller.scrollHeight - scroller.clientHeight;
             const atTop = scroller.scrollTop <= 1;
@@ -130,7 +134,7 @@ const initTimelineScrollLock = () => {
 
             event.preventDefault();
             scroller.scrollTop = clamp(
-                scroller.scrollTop + delta * 0.35,
+                scroller.scrollTop + delta * 0.3,
                 0,
                 maxScroll
             );
