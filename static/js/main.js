@@ -99,8 +99,7 @@ const initTimelineScrollLock = () => {
 
     const isInView = () => {
         const rect = section.getBoundingClientRect();
-        const mid = window.innerHeight / 2;
-        return rect.top < mid && rect.bottom > mid;
+        return rect.top < window.innerHeight && rect.bottom > 0;
     };
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
