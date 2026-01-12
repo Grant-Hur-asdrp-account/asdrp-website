@@ -116,16 +116,6 @@ PORTFOLIO = {
         ],
         "personal": [
             {
-                "title": "STEM Outreach Portal",
-                "description": (
-                    "Built a resource hub for students to discover research programs, "
-                    "complete with search, bookmarking, and newsletter automation."
-                ),
-                "technologies": ["React", "Firebase", "SendGrid"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/stem-portal",
-                "image": "images/project-portal.svg",
-            },
-            {
                 "title": "SantaFest Destiny",
                 "description": (
                     "A fast-paced real-time strategy game about building Santa's workshop "
