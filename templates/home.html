@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}{{ personal.name }} · Portfolio{% endblock %}
+
+{% block body %}
+<section class="row align-items-center g-5">
+    <div class="col-12 col-lg-6">
+        <p class="text-uppercase fw-semibold text-primary small mb-2">
+            {{ personal.tagline }}
+        </p>
+        <h1 class="display-5 fw-bold mb-3">{{ personal.name }}</h1>
+        <p class="lead text-muted mb-4">
+            {{ personal.bio }}
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('about') }}">About Me</a>
+            <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('contact') }}">
+                Contact
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 text-center">
+        <img
+            class="hero-photo"
+            src="{{ url_for('static', filename=personal.photo) }}"
+            alt="{{ personal.name }} headshot"
+        />
+    </div>
+</section>
+
+<section class="mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h3 mb-0">Highlighted Projects</h2>
+        <a class="btn btn-link" href="{{ url_for('projects') }}">View all</a>
+    </div>
+    <div class="row g-4">
+        {% for project in projects %}
+        <article class="col-12 col-md-6">
+            <div class="card h-100 shadow-sm">
+                <img
+                    src="{{ url_for('static', filename=project.image) }}"
+                    class="card-img-top project-image"
+                    alt="{{ project.title }} preview"
+                />
+                <div class="card-body">
+                    <h3 class="card-title h5">{{ project.title }}</h3>
+                    <p class="card-text text-muted">{{ project.description }}</p>
+                    <p class="small text-uppercase fw-semibold text-primary mb-2">
+                        {{ project.technologies|join(", ") }}
+                    </p>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ project.link }}" target="_blank">
+                        View project
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="mt-5">
+    <div class="row g-4">
+        <div class="col-12 col-md-6">
+            <div class="p-4 border rounded-4 h-100 bg-white shadow-sm">
+                <h2 class="h4">Recent Courses</h2>
+                <ul class="list-unstyled mt-3 mb-0">
+                    {% for course in courses %}
+                    <li class="mb-3">
+                        <div class="fw-semibold">{{ course.name }}</div>
+                        <div class="text-muted small">{{ course.term }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a class="btn btn-sm btn-outline-secondary mt-2" href="{{ url_for('courses') }}">
+                    Full course list
+                </a>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="p-4 border rounded-4 h-100 bg-white shadow-sm">
+                <h2 class="h4">Interests</h2>
+                <ul class="list-unstyled mt-3 mb-0">
+                    {% for interest in interests %}
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                        <span class="badge rounded-pill text-bg-primary">★</span>
+                        <span>{{ interest }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a class="btn btn-sm btn-outline-secondary mt-2" href="{{ url_for('about') }}">
+                    Learn more
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

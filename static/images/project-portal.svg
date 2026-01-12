@@ -1,0 +1,7 @@
+<svg width="600" height="320" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="320" rx="32" fill="#ede9fe"/>
+  <rect x="60" y="80" width="480" height="40" rx="12" fill="#8b5cf6"/>
+  <rect x="60" y="150" width="320" height="140" rx="16" fill="#c4b5fd"/>
+  <rect x="420" y="150" width="120" height="140" rx="16" fill="#a5b4fc"/>
+  <text x="80" y="105" font-size="20" fill="#ffffff">Outreach Portal</text>
+</svg>

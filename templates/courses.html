@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Courses · {{ personal.name }}{% endblock %}
+
+{% block body %}
+<section class="mb-4">
+    <h1 class="h2">Courses & Learning</h1>
+    <p class="text-muted">
+        A snapshot of the most impactful courses and learning experiences that
+        shape how I think and build.
+    </p>
+</section>
+
+<div class="table-responsive shadow-sm rounded-4 bg-white">
+    <table class="table align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Course</th>
+                <th>Term</th>
+                <th>Focus Areas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td class="fw-semibold">{{ course.name }}</td>
+                <td>{{ course.term }}</td>
+                <td>
+                    {% for topic in course.topics %}
+                    <span class="badge text-bg-secondary me-2 mb-1">{{ topic }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

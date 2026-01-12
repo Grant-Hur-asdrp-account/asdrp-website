@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Contact · {{ personal.name }}{% endblock %}
+
+{% block body %}
+<section class="row g-4">
+    <div class="col-12 col-lg-5">
+        <div class="p-4 border rounded-4 bg-white shadow-sm h-100">
+            <h1 class="h4">Get in Touch</h1>
+            <p class="text-muted">
+                I love meeting collaborators and mentors. Reach out via the form
+                or email me directly.
+            </p>
+            <ul class="list-unstyled small">
+                <li><strong>Email:</strong> <a href="mailto:{{ personal.email }}">{{ personal.email }}</a></li>
+                <li><strong>Phone:</strong> {{ personal.phone }}</li>
+            </ul>
+            <div class="d-flex gap-3">
+                {% for label, url in personal.socials.items() %}
+                <a class="btn btn-outline-secondary btn-sm" href="{{ url }}" target="_blank">{{ label }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-7">
+        <div class="p-4 border rounded-4 bg-white shadow-sm">
+            <h2 class="h5 mb-3">Send a Message</h2>
+            <form method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.name.label(class="form-label") }}
+                    {{ form.name(class="form-control", placeholder="Your name") }}
+                    {% for error in form.name.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control", placeholder="you@email.com") }}
+                    {% for error in form.email.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.subject.label(class="form-label") }}
+                    {{ form.subject(class="form-control", placeholder="Reason for reaching out") }}
+                    {% for error in form.subject.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.message.label(class="form-label") }}
+                    {{ form.message(class="form-control", rows=5, placeholder="How can I help?") }}
+                    {% for error in form.message.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <button class="btn btn-primary" type="submit">Send message</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

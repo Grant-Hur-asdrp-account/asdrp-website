@@ -1,1 +1,4 @@
 .venv/
+__pycache__/
+contact_submissions.log
+.DS_Store

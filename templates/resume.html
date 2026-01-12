@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Resume · {{ personal.name }}{% endblock %}
+
+{% block body %}
+<section class="mb-4">
+    <h1 class="h2">Resume</h1>
+    <p class="text-muted">
+        Download my resume or skim the highlights below. I keep it updated with
+        current research, leadership, and volunteer work.
+    </p>
+</section>
+
+<div class="row g-4">
+    <div class="col-12 col-lg-8">
+        <div class="p-4 border rounded-4 bg-white shadow-sm h-100">
+            <h2 class="h5 text-uppercase text-muted">Snapshot</h2>
+            <ul class="mt-3">
+                <li>ASDRP research fellow focused on environmental sensing.</li>
+                <li>Co-lead of the school robotics software team.</li>
+                <li>STEM mentor for middle school outreach workshops.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="p-4 border rounded-4 bg-white shadow-sm h-100">
+            <h2 class="h5 text-uppercase text-muted">Download</h2>
+            {% if personal.resume_static_path %}
+            <a
+                class="btn btn-primary w-100 mt-3"
+                href="{{ url_for('static', filename=personal.resume_static_path) }}"
+                target="_blank"
+            >
+                Download Resume (PDF)
+            </a>
+            {% else %}
+            <p class="text-muted mt-3">
+                Drop your PDF inside <code>static/documents</code> and update
+                <code>portfolio_data.py</code> to enable downloads.
+            </p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

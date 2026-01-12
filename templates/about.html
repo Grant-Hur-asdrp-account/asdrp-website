@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}About · {{ personal.name }}{% endblock %}
+
+{% block body %}
+<section class="row g-5 align-items-center">
+    <div class="col-12 col-md-5 text-center">
+        <img
+            class="hero-photo mb-3"
+            src="{{ url_for('static', filename=personal.photo) }}"
+            alt="{{ personal.name }} portrait"
+        />
+        <div class="text-muted">{{ personal.grade }} · {{ personal.school }}</div>
+    </div>
+    <div class="col-12 col-md-7">
+        <h1 class="h2">About Me</h1>
+        <p class="lead text-muted">{{ personal.bio }}</p>
+        <p>
+            I thrive at the intersection of hardware, software, and story telling.
+            Outside the lab you can find me mentoring younger students or documenting
+            experiments for future cohorts. This site is an evolving snapshot of that
+            journey.
+        </p>
+        <div class="row row-cols-1 row-cols-sm-2 g-3 mt-3">
+            {% for label, value in [
+                ("School", personal.school),
+                ("Grade", personal.grade),
+                ("Location", personal.location),
+                ("Email", personal.email)
+            ] %}
+            <div>
+                <div class="text-uppercase small text-muted">{{ label }}</div>
+                <div class="fw-semibold">{{ value }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="mt-5">
+    <h2 class="h4 mb-3">Interests</h2>
+    <div class="row g-3">
+        {% for interest in interests %}
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="interest-card h-100 p-3 border rounded-4">
+                {{ interest }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
