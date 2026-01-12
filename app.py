@@ -34,16 +34,13 @@ def inject_globals():
 
 @app.route("/")
 def home():
-    limited_courses = PORTFOLIO["courses"][:3]
-    highlighted_projects = (
-        PORTFOLIO["projects"]["asdrp"][:2]
-        + PORTFOLIO["projects"]["personal"][:2]
-    )[:4]
+    limited_courses = PORTFOLIO["courses"][:6]
     return render_template(
         "home.html",
         courses=limited_courses,
-        highlighted_projects=highlighted_projects,
         interests=PORTFOLIO["interests"],
+        asdrp_projects=PORTFOLIO["projects"]["asdrp"],
+        personal_projects=PORTFOLIO["projects"]["personal"],
     )
 
 

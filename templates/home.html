@@ -3,23 +3,22 @@
 {% block title %}{{ personal.name }} · Portfolio{% endblock %}
 
 {% block body %}
-<section class="row align-items-center g-5">
+<section id="intro" class="scroll-section row align-items-center g-5">
     <div class="col-12 col-lg-6">
-        <p class="text-uppercase fw-semibold text-primary small mb-2">
+        <p class="text-uppercase fw-semibold text-primary small mb-2" data-reveal>
             {{ personal.tagline }}
         </p>
-        <h1 class="display-5 fw-bold mb-3">{{ personal.name }}</h1>
-        <p class="lead text-muted mb-4">
+        <h1 class="display-5 fw-bold mb-3" data-reveal>{{ personal.name }}</h1>
+        <p class="lead text-muted mb-4" data-reveal>
             {{ personal.bio }}
         </p>
-        <div class="d-flex flex-wrap gap-3">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('about') }}">About Me</a>
-            <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('contact') }}">
-                Contact
-            </a>
+        <div class="d-flex flex-wrap gap-3" data-reveal>
+            <a class="btn btn-primary btn-lg" href="#asdrp">ASDRP Research</a>
+            <a class="btn btn-outline-secondary btn-lg" href="#personal">Personal Projects</a>
+            <a class="btn btn-link" href="{{ url_for('contact') }}">Contact</a>
         </div>
     </div>
-    <div class="col-12 col-lg-6 text-center">
+    <div class="col-12 col-lg-6 text-center" data-reveal>
         <img
             class="hero-photo"
             src="{{ url_for('static', filename=personal.photo) }}"
@@ -28,14 +27,23 @@
     </div>
 </section>
 
-<section class="mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="h3 mb-0">Highlighted Projects</h2>
-        <a class="btn btn-link" href="{{ url_for('projects') }}">View all</a>
+<section id="asdrp" class="scroll-section mt-5">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-2">
+        <div>
+            <p class="text-uppercase fw-semibold text-primary small mb-2" data-reveal>
+                ASDRP Research
+            </p>
+            <h2 class="h3 mb-0" data-reveal>Lab Projects & Experiments</h2>
+            <p class="text-muted mt-2" data-reveal>
+                Research builds focused on real-world problems, internal tooling, and lab-scale
+                deployments.
+            </p>
+        </div>
+        <a class="btn btn-link" href="{{ url_for('projects') }}">Full case studies</a>
     </div>
     <div class="row g-4">
-        {% for project in highlighted_projects %}
-        <article class="col-12 col-md-6">
+        {% for project in asdrp_projects %}
+        <article class="col-12 col-lg-6" data-reveal>
             <div class="card h-100 shadow-sm">
                 <img
                     src="{{ url_for('static', filename=project.image) }}"
@@ -45,16 +53,12 @@
                 <div class="card-body">
                     <h3 class="card-title h5">{{ project.title }}</h3>
                     <p class="card-text text-muted">{{ project.description }}</p>
-                    <p class="small text-uppercase fw-semibold text-primary mb-2">
-                        {{ project.technologies|join(", ") }}
-                    </p>
-                    {% if project.link %}
-                    <a class="btn btn-outline-primary btn-sm" href="{{ project.link }}" target="_blank">
-                        View project
-                    </a>
-                    {% else %}
+                    <div class="mb-3">
+                        {% for tech in project.technologies %}
+                        <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
                     <span class="badge text-bg-secondary">Internal ASDRP project</span>
-                    {% endif %}
                 </div>
             </div>
         </article>
@@ -62,9 +66,50 @@
     </div>
 </section>
 
-<section class="mt-5">
+<section id="personal" class="scroll-section mt-5">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-2">
+        <div>
+            <p class="text-uppercase fw-semibold text-primary small mb-2" data-reveal>
+                Personal Builds
+            </p>
+            <h2 class="h3 mb-0" data-reveal>Projects Outside the Lab</h2>
+            <p class="text-muted mt-2" data-reveal>
+                Independent work that lets me explore game design, machine learning, and creative
+                tooling.
+            </p>
+        </div>
+        <a class="btn btn-link" href="{{ url_for('projects') }}">View all projects</a>
+    </div>
     <div class="row g-4">
-        <div class="col-12 col-md-6">
+        {% for project in personal_projects %}
+        <article class="col-12 col-lg-6" data-reveal>
+            <div class="card h-100 shadow-sm">
+                <img
+                    src="{{ url_for('static', filename=project.image) }}"
+                    class="card-img-top project-image"
+                    alt="{{ project.title }} preview"
+                />
+                <div class="card-body">
+                    <h3 class="card-title h5">{{ project.title }}</h3>
+                    <p class="card-text text-muted">{{ project.description }}</p>
+                    <div class="mb-3">
+                        {% for tech in project.technologies %}
+                        <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ project.link }}" target="_blank">
+                        View project
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="courses" class="scroll-section mt-5">
+    <div class="row g-4">
+        <div class="col-12 col-md-6" data-reveal>
             <div class="p-4 border rounded-4 h-100 bg-white shadow-sm">
                 <h2 class="h4">Recent Courses</h2>
                 <ul class="list-unstyled mt-3 mb-0">
@@ -80,7 +125,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6" data-reveal>
             <div class="p-4 border rounded-4 h-100 bg-white shadow-sm">
                 <h2 class="h4">Interests</h2>
                 <ul class="list-unstyled mt-3 mb-0">
@@ -93,6 +138,26 @@
                 </ul>
                 <a class="btn btn-sm btn-outline-secondary mt-2" href="{{ url_for('about') }}">
                     Learn more
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="connect" class="scroll-section mt-5">
+    <div class="p-4 p-lg-5 border rounded-4 bg-white shadow-sm" data-reveal>
+        <div class="row align-items-center g-4">
+            <div class="col-12 col-lg-8">
+                <h2 class="h4">Let’s connect</h2>
+                <p class="text-muted mb-0">
+                    I’m always looking for feedback, collaborators, and new research
+                    opportunities. Reach out if you want to build something together.
+                </p>
+            </div>
+            <div class="col-12 col-lg-4 text-lg-end">
+                <a class="btn btn-primary me-2" href="{{ url_for('resume') }}">Resume</a>
+                <a class="btn btn-outline-secondary" href="{{ url_for('contact') }}">
+                    Contact
                 </a>
             </div>
         </div>

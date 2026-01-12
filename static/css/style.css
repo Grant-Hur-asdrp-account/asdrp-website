@@ -4,6 +4,10 @@
     --primary: #2563eb;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: var(--slate-50);
     color: var(--slate-900);
@@ -32,4 +36,49 @@ body {
 
 code {
     font-size: 0.9em;
+}
+
+.scroll-section {
+    scroll-margin-top: 96px;
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.08);
+    z-index: 1035;
+}
+
+.scroll-progress__bar {
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    background: linear-gradient(90deg, var(--primary), #38bdf8);
+}
+
+.js-enabled [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.js-enabled [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .js-enabled [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
