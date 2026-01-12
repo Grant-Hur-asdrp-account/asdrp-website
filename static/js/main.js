@@ -99,8 +99,8 @@ const initTimelineScrollLock = () => {
 
     const isInView = () => {
         const rect = section.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.25 &&
-            rect.bottom > window.innerHeight * 0.55;
+        return rect.top < window.innerHeight * 0.8 &&
+            rect.bottom > window.innerHeight * 0.2;
     };
 
     let targetScroll = scroller.scrollTop;
