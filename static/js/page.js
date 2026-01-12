@@ -1,5 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.classList.add("js-enabled");
+
+    const initScrollProgress = () => {
+        const bar = document.querySelector("[data-scroll-progress]");
+        if (!bar) {
+            return;
+        }
+
+        const updateProgress = () => {
+            const doc = document.documentElement;
+            const scrollTop = doc.scrollTop || document.body.scrollTop;
+            const scrollHeight = doc.scrollHeight - doc.clientHeight;
+            const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+            bar.style.transform = `scaleX(${progress})`;
+        };
+
+        let ticking = false;
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateProgress();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        window.addEventListener("scroll", onScroll);
+        window.addEventListener("resize", updateProgress);
+        updateProgress();
+    };
+
+    initScrollProgress();
+
     window.requestAnimationFrame(() => {
         document.body.classList.add("page-loaded");
     });
