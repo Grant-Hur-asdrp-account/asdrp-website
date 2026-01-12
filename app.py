@@ -39,8 +39,7 @@ def home():
         "home.html",
         courses=limited_courses,
         interests=PORTFOLIO["interests"],
-        asdrp_projects=PORTFOLIO["projects"]["asdrp"],
-        personal_projects=PORTFOLIO["projects"]["personal"],
+        featured_project=PORTFOLIO["projects"]["asdrp"][0],
     )
 
 
