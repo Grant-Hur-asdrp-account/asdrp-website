@@ -108,7 +108,7 @@ PORTFOLIO = {
                     "uses a Raspberry Pi camera and OCR to read ultra-low temperature "
                     "displays and raise PagerDuty alerts when anything drifts out of range."
                 ),
-                "technologies": ["Raspberry Pi", "OpenCV", "Tesseract OCR", "PagerDuty"],
+                "technologies": ["Raspberry Pi", "OpenCV", "EasyOCR", "PagerDuty"],
                 "link": "https://github.com/Grant-Hur-asdrp-account/project-deep-freezer",
                 "image": "images/project-deep-freezer.png",
                 "highlights": [
