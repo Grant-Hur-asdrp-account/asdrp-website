@@ -61,6 +61,33 @@ PORTFOLIO = {
     "projects": {
         "asdrp": [
             {
+                "title": "ASDRP Mobile App",
+                "description": (
+                    "An in-progress iOS application that centralizes ASDRP logistics so "
+                    "students and advisors only see the information relevant to their "
+                    "department, lab, and current deadlines. It consolidates scattered "
+                    "emails, calendars, and attendance tools into one personalized feed."
+                ),
+                "technologies": ["Swift", "Firebase Auth", "Firestore", "Kotlin (planned)"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/asdrp-mobile-app",
+                "image": "images/asdrp-mobile-app.png",
+                "highlights": [
+                    "Implemented the to-do list + important forms modules so every student sees actionable tasks by due date.",
+                    "Built the profile explorer that lets students browse labs and connect like a lightweight LinkedIn.",
+                ],
+                "status_note": (
+                    "Project is ongoing: iOS build is live for internal testing; Kotlin port and chatbot are planned next."
+                ),
+                "strengths": [
+                    "Tailors announcements per lab, reducing noise from mass emails.",
+                    "Integrates attendance tracking with Firebase for reliable timestamps.",
+                ],
+                "limitations": [
+                    "Currently available only on iOS; Android support will follow in later phases.",
+                    "Requires strong campus Wi-Fi for real-time syncing.",
+                ],
+            },
+            {
                 "title": "Low-Cost Air Quality Monitor",
                 "description": (
                     "Designed and assembled a portable PM2.5 monitor with Python-based "
