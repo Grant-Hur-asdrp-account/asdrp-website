@@ -99,7 +99,9 @@ const initTimelineScrollLock = () => {
 
     const isInView = () => {
         const rect = section.getBoundingClientRect();
-        return rect.top <= 120 && rect.bottom >= window.innerHeight - 120;
+        const center = rect.top + rect.height / 2;
+        return center > window.innerHeight * 0.2 &&
+            center < window.innerHeight * 0.8;
     };
 
     let targetScroll = scroller.scrollTop;
@@ -144,6 +146,8 @@ const initTimelineScrollLock = () => {
                 scroller.scrollHeight - 1;
 
             if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
+                targetScroll = scroller.scrollTop;
+                rafId = null;
                 return;
             }
 
