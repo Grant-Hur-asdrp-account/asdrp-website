@@ -98,9 +98,20 @@ const initTimelineScrollLock = () => {
         scroller.scrollHeight > scroller.clientHeight + 2;
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-    const lockOffset = 180;
+    const lockOffset = 160;
     let locked = false;
+    let released = false;
     let lockY = 0;
+
+    const isInView = () => {
+        const rect = section.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    };
+
+    const shouldLock = () => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= lockOffset && rect.bottom >= lockOffset + 200;
+    };
 
     const lockScroll = () => {
         if (locked) {
@@ -110,32 +121,24 @@ const initTimelineScrollLock = () => {
         lockY = window.scrollY + rect.top - lockOffset;
         window.scrollTo(0, lockY);
         locked = true;
-        document.documentElement.style.overflow = "hidden";
-        document.body.style.overflow = "hidden";
     };
 
-    const unlockScroll = (direction) => {
+    const unlockScroll = () => {
         if (!locked) {
             return;
         }
         locked = false;
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
-        const nudge = direction === "up" ? -2 : 2;
-        window.scrollTo(0, lockY + nudge);
-    };
-
-    const shouldLock = () => {
-        const rect = section.getBoundingClientRect();
-        const bottomThreshold = window.innerHeight - lockOffset;
-        return rect.top <= lockOffset && rect.bottom >= bottomThreshold;
+        released = true;
     };
 
     const onWindowScroll = () => {
-        if (!isScrollable() || locked) {
+        if (!isScrollable()) {
             return;
         }
-        if (shouldLock()) {
+        if (released && !isInView()) {
+            released = false;
+        }
+        if (!locked && !released && shouldLock()) {
             lockScroll();
         }
     };
@@ -171,20 +174,16 @@ const initTimelineScrollLock = () => {
             const atBottom = scroller.scrollTop >= maxScroll - 2;
 
             if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
-                unlockScroll(delta < 0 ? "up" : "down");
+                unlockScroll();
                 return;
             }
 
             event.preventDefault();
-            const nextScroll = clamp(
+            scroller.scrollTop = clamp(
                 scroller.scrollTop + delta * 0.32,
                 0,
                 maxScroll
             );
-            scroller.scrollTop = nextScroll;
-            if (delta > 0 && nextScroll >= maxScroll - 1) {
-                unlockScroll("down");
-            }
         },
         { passive: false }
     );
