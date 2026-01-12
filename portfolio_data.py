@@ -143,6 +143,25 @@ PORTFOLIO = {
                 ],
                 "status_note": "Actively maintained hobby project with ongoing content updates.",
             },
+            {
+                "title": "AI-InvestiBot",
+                "description": (
+                    "An experimental stock-modeling framework that lets me compare "
+                    "indicator-heavy LSTM architectures, walk-forward validation setups, "
+                    "and automated decision votes without touching live markets."
+                ),
+                "technologies": ["Python", "PyTorch", "Pandas"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/ai-investibot",
+                "image": "images/AI-Investibot.png",
+                "highlights": [
+                    "Reusable pipeline handles data download, indicator caching, model training, and walk-forward evaluation.",
+                    "Decision layer aggregates multiple strategy votes so I can compare price, return, and directional models.",
+                ],
+                "status_note": (
+                    "Core training + validation loop works; I’m iterating on additional tests "
+                    "and refinements before automating more strategies."
+                ),
+            },
         ],
     },
     "interests": [
