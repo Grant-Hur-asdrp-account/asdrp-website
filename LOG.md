@@ -10,7 +10,10 @@
 - **Thought Process**: Keep all editable content in `portfolio_data.py` so I can
   tweak the site later without touching templates. Use Bootstrap to get a
   responsive layout quickly and stick to proper template files instead of inline
-  HTML strings.
+  HTML strings. For the hero, borrow familiar conventions: GitHub-style heading
+  structure with a left-aligned description, right-aligned profile photo, and
+  keyword chips similar to tags on GitHub/itch.io project pages so recruiters
+  can scan important terms (AI, Flask, Swift, etc.).
 - **Resources Used**: Flask documentation (routing/context processors), Bootstrap
   5 navbar + hero examples, Flask-WTF quickstart for CSRF/validation patterns.
 - **Challenges**: Realized `request` isn’t automatically available in templates;
@@ -45,7 +48,10 @@
   CSS repeatedly until the framing felt right.
 - **Thought Process**: Split ASDRP vs personal work so it’s obvious which code is
   private/internal and which lives on GitHub. Highlight AP exam success with a
-  dedicated score section instead of hiding it in text.
+  dedicated score section instead of hiding it in text. The project cards follow
+  a consistent pattern (image + name + keywords) inspired by GitHub’s list views
+  and itch.io game listings; keeping keywords visible boosts discoverability and
+  mirrors how people browse portfolio sites.
 - **Resources Used**: My own GitHub repos for accurate descriptions, College
   Board course info for terminology, Bootstrap grid utilities for the score
   layout.
