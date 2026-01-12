@@ -99,7 +99,7 @@ const initTimelineScrollLock = () => {
 
     const isInView = () => {
         const rect = section.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
+        return rect.top <= 120 && rect.bottom >= window.innerHeight - 120;
     };
 
     let targetScroll = scroller.scrollTop;
@@ -149,7 +149,7 @@ const initTimelineScrollLock = () => {
 
             event.preventDefault();
             const maxScroll = scroller.scrollHeight - scroller.clientHeight;
-            targetScroll = clamp(targetScroll + delta * 0.24, 0, maxScroll);
+            targetScroll = clamp(targetScroll + delta * 0.32, 0, maxScroll);
             if (!rafId) {
                 rafId = window.requestAnimationFrame(animateScroll);
             }
