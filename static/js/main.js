@@ -125,7 +125,7 @@ const initTimelineScrollLock = () => {
             }
 
             event.preventDefault();
-            scroller.scrollBy({ top: delta * 0.6, left: 0, behavior: "auto" });
+            scroller.scrollBy({ top: delta * 0.15, left: 0, behavior: "auto" });
         },
         { passive: false }
     );
