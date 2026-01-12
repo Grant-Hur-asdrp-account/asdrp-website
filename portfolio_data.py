@@ -254,9 +254,15 @@ PORTFOLIO = {
             "image": "images/milestone-placeholder.svg",
         },
         {
+            "year": "11th Grade",
+            "title": "Project Deep Freezer",
+            "detail": "Built the freezer monitoring system and the OCR test pipeline.",
+            "image": "images/milestone-placeholder.svg",
+        },
+        {
             "year": "12th Grade",
-            "title": "Now",
-            "detail": "Building the portfolio and current research projects.",
+            "title": "Now: ASDRP Mobile App",
+            "detail": "Leading the mobile app build with personalized tooling for ASDRP.",
             "image": "images/milestone-placeholder.svg",
         },
     ],
