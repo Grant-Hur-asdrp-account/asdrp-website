@@ -106,6 +106,7 @@ const initTimelineScrollLock = () => {
 
     let targetScroll = scroller.scrollTop;
     let rafId = null;
+    let released = false;
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -131,11 +132,20 @@ const initTimelineScrollLock = () => {
     document.addEventListener(
         "wheel",
         (event) => {
-            if (!isScrollable() || !isInView()) {
+            if (!isScrollable()) {
                 return;
             }
 
             if (event.ctrlKey || event.metaKey) {
+                return;
+            }
+
+            if (!isInView()) {
+                released = false;
+                return;
+            }
+
+            if (released) {
                 return;
             }
 
@@ -148,6 +158,7 @@ const initTimelineScrollLock = () => {
             if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
                 targetScroll = scroller.scrollTop;
                 rafId = null;
+                released = true;
                 return;
             }
 
