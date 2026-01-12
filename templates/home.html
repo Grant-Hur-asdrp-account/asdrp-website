@@ -39,7 +39,17 @@
                 deployments.
             </p>
         </div>
-        <a class="btn btn-link" href="{{ url_for('projects') }}">Full case studies</a>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-link" href="{{ url_for('projects') }}">Full case studies</a>
+            <a
+                class="btn btn-outline-secondary btn-sm"
+                href="https://sites.google.com/asdrp.org/dennisliu/home?authuser=0"
+                target="_blank"
+                rel="noopener"
+            >
+                Lab Group Site
+            </a>
+        </div>
     </div>
     <div class="row g-4">
         {% for project in asdrp_projects %}
