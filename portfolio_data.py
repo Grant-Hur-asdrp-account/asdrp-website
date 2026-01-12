@@ -58,28 +58,52 @@ PORTFOLIO = {
             ],
         },
     ],
-    "projects": [
-        {
-            "title": "Low-Cost Air Quality Monitor",
-            "description": (
-                "Designed and assembled a portable PM2.5 monitor with Python-based "
-                "data logging and a responsive web dashboard."
-            ),
-            "technologies": ["Python", "Flask", "CircuitPython", "Tailwind"],
-            "link": "https://github.com/Grant-Hur-asdrp-account/air-quality-monitor",
-            "image": "images/project-air-quality.svg",
-        },
-        {
-            "title": "STEM Outreach Portal",
-            "description": (
-                "Built a resource hub for local students to discover research programs, "
-                "complete with search, bookmarking, and newsletter automation."
-            ),
-            "technologies": ["React", "Firebase", "SendGrid"],
-            "link": "https://github.com/Grant-Hur-asdrp-account/stem-portal",
-            "image": "images/project-portal.svg",
-        },
-    ],
+    "projects": {
+        "asdrp": [
+            {
+                "title": "Low-Cost Air Quality Monitor",
+                "description": (
+                    "Designed and assembled a portable PM2.5 monitor with Python-based "
+                    "data logging and a responsive web dashboard."
+                ),
+                "technologies": ["Python", "Flask", "CircuitPython", "Tailwind"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/air-quality-monitor",
+                "image": "images/project-air-quality.svg",
+            },
+            {
+                "title": "STEM Outreach Portal",
+                "description": (
+                    "Built a resource hub for local students to discover research programs, "
+                    "complete with search, bookmarking, and newsletter automation."
+                ),
+                "technologies": ["React", "Firebase", "SendGrid"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/stem-portal",
+                "image": "images/project-portal.svg",
+            },
+        ],
+        "personal": [
+            {
+                "title": "Smart Habit Tracker",
+                "description": (
+                    "A cross-platform tracker that syncs with wearables and uses "
+                    "lightweight ML to nudge better routines."
+                ),
+                "technologies": ["Flutter", "Firebase", "Python"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/habit-tracker",
+                "image": "images/project-habits.svg",
+            },
+            {
+                "title": "Meditation Timer for iOS",
+                "description": (
+                    "SwiftUI app focused on minimalism with haptics, live activities, "
+                    "and wind-down reminders."
+                ),
+                "technologies": ["SwiftUI", "Core Data"],
+                "link": "https://github.com/Grant-Hur-asdrp-account/meditation-timer",
+                "image": "images/project-meditation.svg",
+            },
+        ],
+    },
     "interests": [
         "Human-centered design",
         "Edge AI and embedded systems",

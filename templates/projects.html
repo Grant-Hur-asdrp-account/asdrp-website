@@ -11,29 +11,43 @@
     </p>
 </section>
 
-<div class="row g-4">
-    {% for project in projects %}
-    <article class="col-12 col-md-6">
-        <div class="card h-100 shadow-sm">
-            <img
-                src="{{ url_for('static', filename=project.image) }}"
-                class="card-img-top project-image"
-                alt="{{ project.title }} graphic"
-            />
-            <div class="card-body d-flex flex-column">
-                <h2 class="h5">{{ project.title }}</h2>
-                <p class="text-muted flex-grow-1">{{ project.description }}</p>
-                <div class="mb-3">
-                    {% for tech in project.technologies %}
-                    <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
-                    {% endfor %}
+{% for label, projects in projects.items() %}
+<section class="mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 mb-0">
+            {% if label == "asdrp" %}ASDRP Research{% else %}Personal Builds{% endif %}
+        </h2>
+        {% if label == "asdrp" %}
+        <span class="badge text-bg-secondary">Lab</span>
+        {% else %}
+        <span class="badge text-bg-secondary">Independent</span>
+        {% endif %}
+    </div>
+    <div class="row g-4">
+        {% for project in projects %}
+        <article class="col-12 col-md-6">
+            <div class="card h-100 shadow-sm">
+                <img
+                    src="{{ url_for('static', filename=project.image) }}"
+                    class="card-img-top project-image"
+                    alt="{{ project.title }} graphic"
+                />
+                <div class="card-body d-flex flex-column">
+                    <h3 class="h5">{{ project.title }}</h3>
+                    <p class="text-muted flex-grow-1">{{ project.description }}</p>
+                    <div class="mb-3">
+                        {% for tech in project.technologies %}
+                        <span class="badge text-bg-primary me-1 mb-1">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    <a class="btn btn-outline-primary btn-sm mt-auto" href="{{ project.link }}" target="_blank">
+                        View on GitHub
+                    </a>
                 </div>
-                <a class="btn btn-outline-primary btn-sm mt-auto" href="{{ project.link }}" target="_blank">
-                    View on GitHub
-                </a>
             </div>
-        </div>
-    </article>
-    {% endfor %}
-</div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endfor %}
 {% endblock %}

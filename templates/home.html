@@ -34,7 +34,7 @@
         <a class="btn btn-link" href="{{ url_for('projects') }}">View all</a>
     </div>
     <div class="row g-4">
-        {% for project in projects %}
+        {% for project in highlighted_projects %}
         <article class="col-12 col-md-6">
             <div class="card h-100 shadow-sm">
                 <img
