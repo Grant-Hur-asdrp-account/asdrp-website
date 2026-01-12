@@ -79,7 +79,65 @@ const initTimelineHighlight = () => {
     setActive(items[0]);
 };
 
+const initTimelineScrollLock = () => {
+    const section = document.querySelector("#timeline");
+    const scroller = document.querySelector("[data-timeline-scroll]");
+    if (!section || !scroller) {
+        return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+        return;
+    }
+
+    let active = false;
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.target === section) {
+                    active = entry.isIntersecting;
+                }
+            });
+        },
+        { threshold: 0.6 }
+    );
+
+    observer.observe(section);
+
+    document.addEventListener(
+        "wheel",
+        (event) => {
+            if (!active) {
+                return;
+            }
+
+            if (event.ctrlKey || event.metaKey) {
+                return;
+            }
+
+            const delta = event.deltaY;
+            const atTop = scroller.scrollTop <= 0;
+            const atBottom =
+                scroller.scrollTop + scroller.clientHeight >=
+                scroller.scrollHeight - 1;
+
+            if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
+                return;
+            }
+
+            event.preventDefault();
+            scroller.scrollBy({ top: delta, left: 0 });
+        },
+        { passive: false }
+    );
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     initRevealAnimations();
     initTimelineHighlight();
+    initTimelineScrollLock();
 });

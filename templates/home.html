@@ -89,23 +89,27 @@
             </p>
         </div>
     </div>
-    <div class="timeline">
-        {% for item in milestones %}
-        <div class="timeline-item" data-timeline data-reveal>
-            <div class="timeline-marker" aria-hidden="true"></div>
-            <div class="timeline-content">
-                <div class="timeline-meta">{{ item.year }}</div>
-                <h3 class="h5 mb-2">{{ item.title }}</h3>
-                <p class="text-muted mb-3">{{ item.detail }}</p>
-                <div class="timeline-image">
-                    <img
-                        src="{{ url_for('static', filename=item.image) }}"
-                        alt="{{ item.title }} visual"
-                    />
+    <div class="timeline-shell">
+        <div class="timeline-scroll" data-timeline-scroll>
+            <div class="timeline">
+                {% for item in milestones %}
+                <div class="timeline-item" data-timeline data-reveal>
+                    <div class="timeline-marker" aria-hidden="true"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">{{ item.year }}</div>
+                        <h3 class="h5 mb-2">{{ item.title }}</h3>
+                        <p class="text-muted mb-3">{{ item.detail }}</p>
+                        <div class="timeline-image">
+                            <img
+                                src="{{ url_for('static', filename=item.image) }}"
+                                alt="{{ item.title }} visual"
+                            />
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
     </div>
 </section>
 
