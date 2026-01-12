@@ -90,7 +90,6 @@ body {
 .timeline-item {
     position: relative;
     padding: 0 0 2.5rem 1.5rem;
-    scroll-snap-align: start;
 }
 
 .timeline-marker {
@@ -142,7 +141,6 @@ body {
 .timeline-scroll {
     max-height: 70vh;
     overflow-y: auto;
-    scroll-snap-type: y proximity;
     padding-right: 1rem;
     overscroll-behavior: contain;
     scrollbar-width: none;

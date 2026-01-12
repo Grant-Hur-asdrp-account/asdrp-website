@@ -99,8 +99,7 @@ const initTimelineScrollLock = () => {
 
     const isInView = () => {
         const rect = section.getBoundingClientRect();
-        return rect.top < window.innerHeight * 0.8 &&
-            rect.bottom > window.innerHeight * 0.2;
+        return rect.top < window.innerHeight && rect.bottom > 0;
     };
 
     let targetScroll = scroller.scrollTop;
@@ -120,6 +119,12 @@ const initTimelineScrollLock = () => {
         scroller.scrollTop = current + diff * 0.2;
         rafId = window.requestAnimationFrame(animateScroll);
     };
+
+    scroller.addEventListener("scroll", () => {
+        if (!rafId) {
+            targetScroll = scroller.scrollTop;
+        }
+    });
 
     document.addEventListener(
         "wheel",
