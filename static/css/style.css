@@ -140,7 +140,7 @@ body {
 
 .timeline-scroll {
     max-height: 70vh;
-    overflow-y: auto;
+    overflow: hidden;
     padding-right: 1rem;
     overscroll-behavior: contain;
     scrollbar-width: none;
