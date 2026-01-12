@@ -17,7 +17,7 @@ PORTFOLIO = {
         "email": "grant.hur@students.asdrp.org",
         "phone": "(555) 123-4567",
         "socials": {
-            "GitHub": "https://github.com/Grant-Hur-asdrp-account",
+            "GitHub": "https://github.com/gran4",
             "LinkedIn": "https://www.linkedin.com/feed/",
         },
     },
