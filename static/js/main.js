@@ -125,7 +125,10 @@ const initTimelineScrollLock = () => {
             }
 
             event.preventDefault();
-            scroller.scrollBy({ top: delta * 0.15, left: 0, behavior: "auto" });
+            const speed = 0.12;
+            const maxStep = 60;
+            const step = Math.max(-maxStep, Math.min(maxStep, delta * speed));
+            scroller.scrollBy({ top: step, left: 0, behavior: "auto" });
         },
         { passive: false }
     );
