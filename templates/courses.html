@@ -31,6 +31,25 @@
                     {% endfor %}
                 </td>
             </tr>
+            {% if course.description %}
+            <tr>
+                <td colspan="3">
+                    <p class="mb-2 text-muted">{{ course.description }}</p>
+                    {% if course.projects %}
+                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                        {% for entry in course.projects %}
+                        <div class="col">
+                            <div class="border rounded-4 p-3 h-100 bg-light">
+                                <div class="fw-semibold">{{ entry.title }}</div>
+                                <p class="small mb-0 text-muted">{{ entry.summary }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>
