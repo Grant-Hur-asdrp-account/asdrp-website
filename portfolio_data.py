@@ -23,14 +23,74 @@ PORTFOLIO = {
     },
     "courses": [
         {
-            "name": "AP Computer Science A",
-            "term": "2023-2024",
-            "topics": ["Java", "Data Structures", "Object-Oriented Design"],
+            "name": "AP US History",
+            "term": "9th Grade",
+            "topics": ["Historical Analysis", "Essay Writing", "College Board Exam 5"],
         },
         {
-            "name": "Multivariable Calculus",
-            "term": "Fall 2024",
-            "topics": ["Vector Calculus", "Applications", "Proof Writing"],
+            "name": "AP Precalculus",
+            "term": "10th Grade",
+            "topics": ["Functions", "Trigonometry", "Exam Score 5"],
+        },
+        {
+            "name": "AP Government & Politics",
+            "term": "10th Grade",
+            "topics": ["Civics", "Policy Analysis", "Exam Score 5"],
+        },
+        {
+            "name": "AP Computer Science Principles",
+            "term": "10th Grade",
+            "topics": ["Computational Thinking", "Creative Project", "Exam Score 5"],
+        },
+        {
+            "name": "AP Psychology",
+            "term": "10th Grade",
+            "topics": ["Cognition", "Behavioral Science", "Exam Score 5"],
+        },
+        {
+            "name": "AP English Language & Composition",
+            "term": "11th Grade",
+            "topics": ["Rhetorical Analysis", "Argumentation", "Exam Score 4"],
+        },
+        {
+            "name": "AP Chemistry",
+            "term": "11th Grade",
+            "topics": ["Stoichiometry", "Thermodynamics", "Exam Score 5"],
+        },
+        {
+            "name": "AP Physics 1",
+            "term": "11th Grade",
+            "topics": ["Mechanics", "Laboratory Skills", "Exam Score 5"],
+        },
+        {
+            "name": "AP Calculus BC",
+            "term": "11th Grade",
+            "topics": ["Series", "Differential Equations", "Exam Score 5"],
+        },
+        {
+            "name": "AP Computer Science A",
+            "term": "11th Grade",
+            "topics": ["Java", "Data Structures", "Exam Score 5"],
+        },
+        {
+            "name": "AP English Literature",
+            "term": "12th Grade",
+            "topics": ["Literary Analysis", "Comparative Essays"],
+        },
+        {
+            "name": "AP Statistics",
+            "term": "12th Grade",
+            "topics": ["Probability", "Inference"],
+        },
+        {
+            "name": "AP Physics C: Mechanics",
+            "term": "12th Grade",
+            "topics": ["Classical Mechanics", "Calculus-based Modeling"],
+        },
+        {
+            "name": "AP World History",
+            "term": "12th Grade",
+            "topics": ["Global Perspectives", "Essay Writing"],
         },
         {
             "name": "ASDRP Research Fellowship",
@@ -42,17 +102,17 @@ PORTFOLIO = {
             ),
             "projects": [
                 {
-                    "title": "Low-Cost Air Quality Monitor",
+                    "title": "ASDRP Mobile App",
                     "summary": (
-                        "Led hardware integration and calibration for a portable PM2.5 "
-                        "monitor that streams data to a Flask dashboard."
+                        "Centralized to-do lists, profile explorer, and attendance system "
+                        "to reduce program communication overload."
                     ),
                 },
                 {
-                    "title": "STEM Outreach Portal",
+                    "title": "Project Deep Freezer",
                     "summary": (
-                        "Built a student-facing portal to catalog research programs, "
-                        "using peer feedback to refine UX and onboarding."
+                        "Raspberry Pi + OCR monitoring system that sends alerts when "
+                        "ultra-low freezers drift out of range."
                     ),
                 },
             ],
