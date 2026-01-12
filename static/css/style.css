@@ -25,6 +25,12 @@ body {
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+.js-enabled body.page-exit {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
 .hero-photo {
     max-width: min(360px, 80vw);
     width: 100%;
