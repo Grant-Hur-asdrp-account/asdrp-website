@@ -201,7 +201,7 @@ PORTFOLIO = {
                     "and automated decision votes without touching live markets."
                 ),
                 "technologies": ["Python", "PyTorch", "Pandas"],
-                "link": "https://github.com/Grant-Hur-asdrp-account/ai-investibot",
+                "link": "https://github.com/gran4/AI-InvestiBot",
                 "image": "images/AI-Investibot.png",
                 "highlights": [
                     "Reusable pipeline handles data download, indicator caching, model training, and walk-forward evaluation.",
