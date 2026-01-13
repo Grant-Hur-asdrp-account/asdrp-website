@@ -118,3 +118,26 @@
   final settings as `object-fit: contain` with controlled padding.
 - **What I Learned**: Visual polish often depends on small spacing decisions, so
   it helps to compare before/after screenshots during tweaks.
+
+### Timeline Scroll Lock + Milestones
+- **Timeline**: Reworked the home timeline scroll lock repeatedly to feel
+  consistent across wheel + keyboard inputs. Added arrow/page key handling,
+  smoothed the arrow-key lock-in animation, tuned unlock buffering, and made the
+  lock carry remaining scroll into the timeline so it feels continuous. Updated
+  the top scroll progress bar to include timeline scrolling. Swapped milestone
+  images for real assets (ASDRP logo, SantaFestDestiny, AI‑InvestiBot, GitHub,
+  Project Deep Freezer, ASDRP Mobile App, Python book).
+- **Thought Process**: The timeline is meant to feel like a controlled
+  scrollytelling module, so I wanted the transition into the lock to feel like
+  a seamless continuation of the user’s scroll, not a hard snap. Keyboard
+  navigation should feel as polished as mouse scroll, and progress feedback
+  should continue even when the page is temporarily locked.
+- **Resources Used**: DOM scroll/keyboard event handling references, on-page
+  testing with rapid scroll + arrow keys to validate lock behavior.
+- **Challenges**: Fast scrolling caused jitter or early locks from below; fixed
+  by locking only at the snap point and by carrying overflow scroll into the
+  timeline. Matching the progress bar to internal scrolling required a custom
+  “virtual scroll” calculation.
+- **What I Learned**: Scroll-lock experiences need careful handling of overshoot
+  and release buffers to feel natural. Small timing changes can dramatically
+  change perceived smoothness.

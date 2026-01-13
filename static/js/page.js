@@ -11,7 +11,36 @@ document.addEventListener("DOMContentLoaded", () => {
             const doc = document.documentElement;
             const scrollTop = doc.scrollTop || document.body.scrollTop;
             const scrollHeight = doc.scrollHeight - doc.clientHeight;
-            const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+            let virtualScroll = scrollTop;
+            let virtualMax = scrollHeight;
+
+            const timeline = document.querySelector("#timeline");
+            const scroller = document.querySelector("[data-timeline-scroll]");
+            if (timeline && scroller) {
+                const maxExtra = scroller.scrollHeight - scroller.clientHeight;
+                if (maxExtra > 0) {
+                    const lockTarget =
+                        timeline.querySelector("[data-timeline-lock]") ||
+                        timeline;
+                    const lockOffset = window.__timelineLockOffset || 0;
+                    const timelineTop =
+                        timeline.getBoundingClientRect().top + scrollTop;
+                    const timelineBottom =
+                        timelineTop + timeline.offsetHeight;
+                    const lockTargetTop =
+                        lockTarget.getBoundingClientRect().top + scrollTop;
+                    const lockStart = lockTargetTop - lockOffset;
+
+                    virtualMax += maxExtra;
+                    if (scrollTop >= timelineBottom - lockOffset) {
+                        virtualScroll = scrollTop + maxExtra;
+                    } else if (scrollTop >= lockStart) {
+                        virtualScroll = scrollTop + scroller.scrollTop;
+                    }
+                }
+            }
+
+            const progress = virtualMax > 0 ? virtualScroll / virtualMax : 0;
             bar.style.transform = `scaleX(${progress})`;
         };
 
@@ -28,6 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.addEventListener("scroll", onScroll);
         window.addEventListener("resize", updateProgress);
+        const timelineScroller = document.querySelector("[data-timeline-scroll]");
+        if (timelineScroller) {
+            timelineScroller.addEventListener("scroll", onScroll);
+        }
+        window.addEventListener("timeline-scroll", onScroll);
         updateProgress();
     };
 
