@@ -29,13 +29,23 @@ document.addEventListener("DOMContentLoaded", () => {
                         timelineTop + timeline.offsetHeight;
                     const lockTargetTop =
                         lockTarget.getBoundingClientRect().top + scrollTop;
-                    const lockStart = lockTargetTop - lockOffset;
+                    const lockStartFallback = lockTargetTop - lockOffset;
+                    const lockStart = Number.isFinite(window.__timelineLockY)
+                        ? window.__timelineLockY
+                        : lockStartFallback;
+                    const timelineScrollTop = Number.isFinite(window.__timelineScrollTop)
+                        ? window.__timelineScrollTop
+                        : scroller.scrollTop;
 
                     virtualMax += maxExtra;
                     if (scrollTop >= timelineBottom - lockOffset) {
                         virtualScroll = scrollTop + maxExtra;
-                    } else if (scrollTop >= lockStart) {
-                        virtualScroll = scrollTop + scroller.scrollTop;
+                    } else if (
+                        scrollTop >= lockStart ||
+                        timelineScrollTop > 0 ||
+                        window.__timelineLocked
+                    ) {
+                        virtualScroll = scrollTop + timelineScrollTop;
                     }
                 }
             }

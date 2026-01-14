@@ -106,6 +106,9 @@ const initTimelineScrollLock = () => {
     let released = false;
     let lockY = 0;
     let lastScrollY = window.scrollY;
+    window.__timelineLocked = locked;
+    window.__timelineLockY = lockY;
+    window.__timelineScrollTop = 0;
 
     const lockTarget = section.querySelector("[data-timeline-lock]") || section;
     const getTop = (element) => element.getBoundingClientRect().top + window.scrollY;
@@ -138,6 +141,8 @@ const initTimelineScrollLock = () => {
         lockY = getLockY();
         html.style.scrollBehavior = "auto";
         locked = true;
+        window.__timelineLocked = true;
+        window.__timelineLockY = lockY;
         if (!smooth) {
             window.scrollTo(0, lockY);
             return;
@@ -170,12 +175,54 @@ const initTimelineScrollLock = () => {
         locked = false;
         lockAnimating = false;
         released = true;
+        window.__timelineLocked = false;
         html.style.scrollBehavior = "";
     };
 
     const unlockBuffer = 140;
     const wheelSpeed = 1.25;
+    const entryCarryBoost = 1.2;
     let keyScrollRaf = null;
+    let restoreScrollRaf = null;
+    const scheduleScrollBehaviorRestore = () => {
+        if (restoreScrollRaf) {
+            cancelAnimationFrame(restoreScrollRaf);
+        }
+        restoreScrollRaf = requestAnimationFrame(() => {
+            restoreScrollRaf = null;
+            if (!locked) {
+                html.style.scrollBehavior = "";
+            }
+        });
+    };
+    const applyWindowScrollTo = (targetY, behavior = "auto") => {
+        if (behavior === "smooth") {
+            if (restoreScrollRaf) {
+                cancelAnimationFrame(restoreScrollRaf);
+                restoreScrollRaf = null;
+            }
+            html.style.scrollBehavior = "";
+            window.scrollTo({ top: targetY, behavior: "smooth" });
+            return;
+        }
+        html.style.scrollBehavior = "auto";
+        window.scrollTo(0, targetY);
+        scheduleScrollBehaviorRestore();
+    };
+    const applyWindowScrollBy = (deltaY, behavior = "auto") => {
+        if (behavior === "smooth") {
+            if (restoreScrollRaf) {
+                cancelAnimationFrame(restoreScrollRaf);
+                restoreScrollRaf = null;
+            }
+            html.style.scrollBehavior = "";
+            window.scrollBy({ top: deltaY, behavior: "smooth" });
+            return;
+        }
+        html.style.scrollBehavior = "auto";
+        window.scrollBy(0, deltaY);
+        scheduleScrollBehaviorRestore();
+    };
     const isEditableTarget = (target) => {
         if (!target) {
             return false;
@@ -189,18 +236,29 @@ const initTimelineScrollLock = () => {
         );
     };
 
+    const syncTimelineScroll = () => {
+        window.__timelineScrollTop = scroller.scrollTop;
+    };
+
     const scrollTimelineBy = (delta, windowDelta = delta) => {
         const maxScroll = scroller.scrollHeight - scroller.clientHeight;
-        const atTop = scroller.scrollTop <= 1;
-        const atBottom = scroller.scrollTop >= maxScroll - 2;
+        const startTop = scroller.scrollTop;
+        const desiredTop = startTop + delta;
+        const nextTop = clamp(desiredTop, 0, maxScroll);
+        scroller.scrollTop = nextTop;
+        syncTimelineScroll();
 
-        if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
-            window.scrollBy(0, windowDelta);
+        const consumedTimeline = nextTop - startTop;
+        const leftoverTimeline = delta - consumedTimeline;
+        const speed = windowDelta !== 0 ? delta / windowDelta : 1;
+
+        if (Math.abs(leftoverTimeline) > 0.5 && speed !== 0) {
+            const leftoverRaw = leftoverTimeline / speed;
             unlockScroll();
+            applyWindowScrollTo(lockY + leftoverRaw);
             return false;
         }
 
-        scroller.scrollTop = clamp(scroller.scrollTop + delta, 0, maxScroll);
         if (window.scrollY !== lockY) {
             window.scrollTo(0, lockY);
         }
@@ -212,7 +270,8 @@ const initTimelineScrollLock = () => {
         const hasCarry = Number.isFinite(carryDelta) && Math.abs(carryDelta) > 0;
         lockScroll(smooth);
         if (hasCarry) {
-            scrollTimelineBy(carryDelta * wheelSpeed, carryDelta);
+            const boostedCarry = carryDelta * entryCarryBoost;
+            scrollTimelineBy(boostedCarry * wheelSpeed, boostedCarry);
         }
     };
 
@@ -232,6 +291,10 @@ const initTimelineScrollLock = () => {
             currentStep += 1;
             if (!shouldContinue || !locked) {
                 keyScrollRaf = null;
+                const remaining = delta - stepDelta * currentStep;
+                if (Math.abs(remaining) > 0.5) {
+                    applyWindowScrollBy(remaining);
+                }
                 return;
             }
             keyScrollRaf = requestAnimationFrame(tick);
@@ -265,7 +328,10 @@ const initTimelineScrollLock = () => {
         }
 
         if (locked && !lockAnimating && currentY !== lockY) {
-            window.scrollTo(0, lockY);
+            const windowDelta = currentY - lockY;
+            scrollTimelineBy(windowDelta, windowDelta);
+            lastScrollY = lockY;
+            return;
         }
 
         lastScrollY = currentY;
@@ -348,35 +414,71 @@ const initTimelineScrollLock = () => {
             return;
         }
 
-        if (released) {
-            return;
-        }
-
+        event.preventDefault();
         if (!locked) {
-            const predictedY =
-                delta === Infinity
-                    ? Number.POSITIVE_INFINITY
-                    : delta === -Infinity
-                      ? Number.NEGATIVE_INFINITY
-                      : window.scrollY + delta;
-            if (crossedLock(window.scrollY, predictedY)) {
-                event.preventDefault();
-                lockScroll(true);
-                if (Number.isFinite(delta)) {
-                    if (useSmooth) {
-                        smoothScrollTimelineBy(delta);
-                    } else {
-                        scrollTimelineBy(delta);
+            if (!released) {
+                const predictedY =
+                    delta === Infinity
+                        ? Number.POSITIVE_INFINITY
+                        : delta === -Infinity
+                          ? Number.NEGATIVE_INFINITY
+                          : window.scrollY + delta;
+                if (crossedLock(window.scrollY, predictedY)) {
+                    let carry = 0;
+                    if (Number.isFinite(delta)) {
+                        const targetLockY = getLockY();
+                        const distanceToLock = targetLockY - window.scrollY;
+                        carry = delta - distanceToLock;
                     }
+                    lockScroll(true);
+                    if (Number.isFinite(delta) && Math.abs(carry) > 0.5) {
+                        if (useSmooth) {
+                            smoothScrollTimelineBy(carry);
+                        } else {
+                            scrollTimelineBy(carry);
+                        }
+                    }
+                    return;
                 }
+            }
+            if (delta === -Infinity) {
+                applyWindowScrollTo(0, "smooth");
+                return;
+            }
+            if (delta === Infinity) {
+                const doc = document.documentElement;
+                const maxY = doc.scrollHeight - doc.clientHeight;
+                applyWindowScrollTo(maxY, "smooth");
+                return;
+            }
+            if (Number.isFinite(delta)) {
+                applyWindowScrollBy(delta, "smooth");
             }
             return;
         }
-
-        event.preventDefault();
         const maxScroll = scroller.scrollHeight - scroller.clientHeight;
+        if (Number.isFinite(delta)) {
+            const startTop = scroller.scrollTop;
+            const desiredTop = startTop + delta;
+            const nextTop = clamp(desiredTop, 0, maxScroll);
+            const consumedTimeline = nextTop - startTop;
+            const leftover = delta - consumedTimeline;
+
+            if (Math.abs(leftover) > 0.5) {
+                if (keyScrollRaf) {
+                    cancelAnimationFrame(keyScrollRaf);
+                    keyScrollRaf = null;
+                }
+                scroller.scrollTop = nextTop;
+                unlockScroll();
+                applyWindowScrollTo(lockY + leftover);
+                window.dispatchEvent(new Event("timeline-scroll"));
+                return;
+            }
+        }
         if (delta === -Infinity) {
             scroller.scrollTop = 0;
+            syncTimelineScroll();
             if (window.scrollY !== lockY) {
                 window.scrollTo(0, lockY);
             }
@@ -384,6 +486,7 @@ const initTimelineScrollLock = () => {
         }
         if (delta === Infinity) {
             scroller.scrollTop = maxScroll;
+            syncTimelineScroll();
             if (window.scrollY !== lockY) {
                 window.scrollTo(0, lockY);
             }
