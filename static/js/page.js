@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (timeline && scroller) {
                 const maxExtra = scroller.scrollHeight - scroller.clientHeight;
                 if (maxExtra > 0) {
+                    const progressWeight = Number.isFinite(window.__timelineProgressWeight)
+                        ? window.__timelineProgressWeight
+                        : 1;
+                    const weightedExtra = maxExtra * progressWeight;
                     const lockTarget =
                         timeline.querySelector("[data-timeline-lock]") ||
                         timeline;
@@ -36,16 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     const timelineScrollTop = Number.isFinite(window.__timelineScrollTop)
                         ? window.__timelineScrollTop
                         : scroller.scrollTop;
+                    const weightedTimelineScroll =
+                        timelineScrollTop * progressWeight;
 
-                    virtualMax += maxExtra;
+                    virtualMax += weightedExtra;
                     if (scrollTop >= timelineBottom - lockOffset) {
-                        virtualScroll = scrollTop + maxExtra;
+                        virtualScroll = scrollTop + weightedExtra;
                     } else if (
                         scrollTop >= lockStart ||
                         timelineScrollTop > 0 ||
                         window.__timelineLocked
                     ) {
-                        virtualScroll = scrollTop + timelineScrollTop;
+                        virtualScroll = scrollTop + weightedTimelineScroll;
                     }
                 }
             }

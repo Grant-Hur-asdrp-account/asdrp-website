@@ -106,6 +106,9 @@ const initTimelineScrollLock = () => {
     let released = false;
     let lockY = 0;
     let lastScrollY = window.scrollY;
+    let keyLockIntent = false;
+    let keyLockIntentTime = 0;
+    const keyLockIntentWindow = 180;
     window.__timelineLocked = locked;
     window.__timelineLockY = lockY;
     window.__timelineScrollTop = 0;
@@ -138,6 +141,7 @@ const initTimelineScrollLock = () => {
         if (locked) {
             return;
         }
+        cancelWindowKeyScroll();
         lockY = getLockY();
         html.style.scrollBehavior = "auto";
         locked = true;
@@ -182,8 +186,17 @@ const initTimelineScrollLock = () => {
     const unlockBuffer = 140;
     const wheelSpeed = 1.25;
     const entryCarryBoost = 1.2;
+    window.__timelineProgressWeight = 1 / wheelSpeed;
     let keyScrollRaf = null;
     let restoreScrollRaf = null;
+    let windowKeyRaf = null;
+    let windowKeyPending = 0;
+    const isTimelineTarget = (target) => {
+        if (!target) {
+            return false;
+        }
+        return target === scroller || scroller.contains(target);
+    };
     const scheduleScrollBehaviorRestore = () => {
         if (restoreScrollRaf) {
             cancelAnimationFrame(restoreScrollRaf);
@@ -222,6 +235,40 @@ const initTimelineScrollLock = () => {
         html.style.scrollBehavior = "auto";
         window.scrollBy(0, deltaY);
         scheduleScrollBehaviorRestore();
+    };
+    const cancelWindowKeyScroll = () => {
+        if (windowKeyRaf) {
+            cancelAnimationFrame(windowKeyRaf);
+            windowKeyRaf = null;
+        }
+        windowKeyPending = 0;
+    };
+    const smoothWindowScrollBy = (delta) => {
+        windowKeyPending += delta;
+        if (windowKeyRaf) {
+            return;
+        }
+        const tick = () => {
+            if (Math.abs(windowKeyPending) < 0.5) {
+                windowKeyPending = 0;
+                windowKeyRaf = null;
+                return;
+            }
+            const doc = document.documentElement;
+            const maxY = doc.scrollHeight - doc.clientHeight;
+            const step = clamp(windowKeyPending, -40, 40);
+            const targetY = clamp(window.scrollY + step, 0, maxY);
+            const actualStep = targetY - window.scrollY;
+            if (Math.abs(actualStep) < 0.5) {
+                windowKeyPending = 0;
+                windowKeyRaf = null;
+                return;
+            }
+            applyWindowScrollBy(actualStep);
+            windowKeyPending -= actualStep;
+            windowKeyRaf = requestAnimationFrame(tick);
+        };
+        windowKeyRaf = requestAnimationFrame(tick);
     };
     const isEditableTarget = (target) => {
         if (!target) {
@@ -323,7 +370,17 @@ const initTimelineScrollLock = () => {
             if (crossedLock(lastScrollY, currentY)) {
                 const targetLockY = getLockY();
                 const carry = currentY - targetLockY;
-                lockWithCarry(carry);
+                const shouldSmooth =
+                    keyLockIntent &&
+                    performance.now() - keyLockIntentTime < keyLockIntentWindow;
+                keyLockIntent = false;
+                lockWithCarry(carry, shouldSmooth);
+            }
+            if (
+                keyLockIntent &&
+                performance.now() - keyLockIntentTime >= keyLockIntentWindow
+            ) {
+                keyLockIntent = false;
             }
         }
 
@@ -395,6 +452,7 @@ const initTimelineScrollLock = () => {
         const pageDelta = window.innerHeight * 0.9;
         let delta = 0;
         const useSmooth = key === "ArrowDown" || key === "ArrowUp";
+        const isTimelineKeyTarget = isTimelineTarget(event.target);
 
         if (key === "ArrowDown") {
             delta = 120;
@@ -411,6 +469,12 @@ const initTimelineScrollLock = () => {
         } else if (key === "End") {
             delta = Infinity;
         } else {
+            return;
+        }
+
+        if (!locked && !isTimelineKeyTarget) {
+            keyLockIntent = true;
+            keyLockIntentTime = performance.now();
             return;
         }
 
