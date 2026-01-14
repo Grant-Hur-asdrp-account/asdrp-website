@@ -147,3 +147,12 @@
 - **What I Learned**: Scroll-lock experiences need careful handling of overshoot
   and release buffers to feel natural. Small timing changes can dramatically
   change perceived smoothness.
+
+### Mobile Navigation Offcanvas
+- **Navigation**: Converted the mobile navbar collapse into an off-canvas drawer
+  with a dimmed backdrop, blocked body scroll while open, and added a JS
+  fallback so the toggle works even if Bootstrap JS fails to load.
+- **Thought Process**: Off-canvas keeps the hero layout stable while making the
+  navigation feel intentional on smaller screens.
+- **Timeline**: Added a resize sync so the lock position and scroll progress
+  stay accurate after viewport changes.

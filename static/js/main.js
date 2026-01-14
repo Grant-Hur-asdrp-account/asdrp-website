@@ -186,7 +186,6 @@ const initTimelineScrollLock = () => {
     const unlockBuffer = 140;
     const wheelSpeed = 1.25;
     const entryCarryBoost = 1.2;
-    window.__timelineProgressWeight = 1 / wheelSpeed;
     let keyScrollRaf = null;
     let restoreScrollRaf = null;
     let windowKeyRaf = null;
@@ -235,6 +234,28 @@ const initTimelineScrollLock = () => {
         html.style.scrollBehavior = "auto";
         window.scrollBy(0, deltaY);
         scheduleScrollBehaviorRestore();
+    };
+    const refreshLockMetrics = () => {
+        if (!isScrollable()) {
+            if (locked) {
+                unlockScroll();
+            }
+            syncTimelineScroll();
+            lastScrollY = window.scrollY;
+            return;
+        }
+
+        const nextLockY = getLockY();
+        lockY = nextLockY;
+        if (locked) {
+            window.__timelineLockY = lockY;
+            html.style.scrollBehavior = "auto";
+            window.scrollTo(0, lockY);
+            scheduleScrollBehaviorRestore();
+        }
+        syncTimelineScroll();
+        lastScrollY = window.scrollY;
+        window.dispatchEvent(new Event("timeline-scroll"));
     };
     const cancelWindowKeyScroll = () => {
         if (windowKeyRaf) {
@@ -395,6 +416,7 @@ const initTimelineScrollLock = () => {
     };
 
     window.addEventListener("scroll", onWindowScroll, { passive: true });
+    window.addEventListener("resize", refreshLockMetrics);
 
     window.addEventListener(
         "wheel",

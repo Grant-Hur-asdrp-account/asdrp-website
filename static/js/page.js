@@ -19,10 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (timeline && scroller) {
                 const maxExtra = scroller.scrollHeight - scroller.clientHeight;
                 if (maxExtra > 0) {
-                    const progressWeight = Number.isFinite(window.__timelineProgressWeight)
-                        ? window.__timelineProgressWeight
-                        : 1;
-                    const weightedExtra = maxExtra * progressWeight;
                     const lockTarget =
                         timeline.querySelector("[data-timeline-lock]") ||
                         timeline;
@@ -34,24 +30,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     const lockTargetTop =
                         lockTarget.getBoundingClientRect().top + scrollTop;
                     const lockStartFallback = lockTargetTop - lockOffset;
-                    const lockStart = Number.isFinite(window.__timelineLockY)
+                    const lockStart =
+                        window.__timelineLocked &&
+                        Number.isFinite(window.__timelineLockY)
                         ? window.__timelineLockY
                         : lockStartFallback;
                     const timelineScrollTop = Number.isFinite(window.__timelineScrollTop)
                         ? window.__timelineScrollTop
                         : scroller.scrollTop;
-                    const weightedTimelineScroll =
-                        timelineScrollTop * progressWeight;
 
-                    virtualMax += weightedExtra;
+                    virtualMax += maxExtra;
                     if (scrollTop >= timelineBottom - lockOffset) {
-                        virtualScroll = scrollTop + weightedExtra;
+                        virtualScroll = scrollTop + maxExtra;
                     } else if (
                         scrollTop >= lockStart ||
                         timelineScrollTop > 0 ||
                         window.__timelineLocked
                     ) {
-                        virtualScroll = scrollTop + weightedTimelineScroll;
+                        virtualScroll = scrollTop + timelineScrollTop;
                     }
                 }
             }
@@ -82,6 +78,89 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     initScrollProgress();
+
+    const initNavbarOffcanvas = () => {
+        const toggler = document.querySelector(".navbar-toggler");
+        const collapse = document.querySelector("#mainNav");
+        const backdrop = document.querySelector("[data-nav-backdrop]");
+        if (!toggler || !collapse) {
+            return;
+        }
+
+        if (!backdrop) {
+            return;
+        }
+
+        const hasBootstrap =
+            window.bootstrap && typeof window.bootstrap.Collapse === "function";
+
+        const syncExpanded = (expanded) => {
+            document.body.classList.toggle("nav-open", expanded);
+            document.documentElement.classList.toggle("nav-open", expanded);
+            backdrop.classList.toggle("is-visible", expanded);
+            toggler.setAttribute("aria-expanded", expanded ? "true" : "false");
+            if (!hasBootstrap) {
+                collapse.classList.toggle("show", expanded);
+            }
+        };
+
+        const isOpen = () =>
+            collapse.classList.contains("show") ||
+            collapse.classList.contains("collapsing");
+        const collapseInstance = hasBootstrap
+            ? window.bootstrap.Collapse.getOrCreateInstance(collapse, {
+                  toggle: false,
+              })
+            : null;
+        const requestClose = () => {
+            if (hasBootstrap && collapseInstance) {
+                collapseInstance.hide();
+                return;
+            }
+            syncExpanded(false);
+        };
+
+        toggler.addEventListener("click", (event) => {
+            if (hasBootstrap) {
+                return;
+            }
+            event.preventDefault();
+            syncExpanded(!isOpen());
+        });
+
+        backdrop.addEventListener("click", () => {
+            requestClose();
+        });
+
+        collapse.addEventListener("click", (event) => {
+            const link = event.target.closest("a");
+            if (!link) {
+                return;
+            }
+            requestClose();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key !== "Escape") {
+                return;
+            }
+            if (!isOpen()) {
+                return;
+            }
+            requestClose();
+        });
+
+        if (hasBootstrap) {
+            collapse.addEventListener("shown.bs.collapse", () => {
+                syncExpanded(true);
+            });
+            collapse.addEventListener("hidden.bs.collapse", () => {
+                syncExpanded(false);
+            });
+        }
+    };
+
+    initNavbarOffcanvas();
 
     window.requestAnimationFrame(() => {
         document.body.classList.add("page-loaded");
