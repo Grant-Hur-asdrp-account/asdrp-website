@@ -86,6 +86,14 @@ const initTimelineScrollLock = () => {
         return;
     }
 
+    const isSmallScreen = window.matchMedia("(max-width: 991.98px)").matches;
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const isTouchDevice =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+    if (isSmallScreen || isCoarsePointer || isTouchDevice) {
+        return;
+    }
+
     const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
     ).matches;
