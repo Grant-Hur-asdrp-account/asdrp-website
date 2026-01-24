@@ -152,6 +152,21 @@
 - **Navigation**: Converted the mobile navbar collapse into an off-canvas drawer
   with a dimmed backdrop, blocked body scroll while open, and added a JS
   fallback so the toggle works even if Bootstrap JS fails to load.
+- **Navigation**: Lifted the navbar above the backdrop so the toggle stays
+  clickable, and raised the scroll progress bar to keep it visible while
+  resizing.
+- **Navigation**: Removed the fixed-height override that was blocking the
+  collapse animation so the drawer can close correctly.
+- **Navigation**: Lifted the hamburger button above the drawer so it remains
+  clickable when the menu is open.
+
+### Personal Artifact Drawer
+- **Interaction**: Added a fixed “Artifacts” drawer on the home page with quick
+  notes from builds, sketches, and experiments, plus a lightweight toggle and
+  outside-click/escape close behavior.
+- **Interaction**: Nudged the drawer lower on the viewport for a calmer default
+  placement.
+- **Interaction**: Dropped the drawer closer to the bottom edge for easier reach.
 - **Thought Process**: Off-canvas keeps the hero layout stable while making the
   navigation feel intentional on smaller screens.
 - **Timeline**: Added a resize sync so the lock position and scroll progress

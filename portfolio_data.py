@@ -22,6 +22,26 @@ PORTFOLIO = {
             "LinkedIn": "https://www.linkedin.com/feed/",
         },
     },
+    "artifacts": [
+        {
+            "title": "Freezer OCR test log",
+            "meta": "Lab monitoring | 2024",
+            "detail": "Notes from OCR calibration runs and the edge cases that broke early builds.",
+            "link": None,
+        },
+        {
+            "title": "Mobile app onboarding sketch",
+            "meta": "ASDRP iOS | 2025",
+            "detail": "Storyboard snippet mapping the student onboarding flow and lab selection.",
+            "link": None,
+        },
+        {
+            "title": "AI-InvestiBot experiment card",
+            "meta": "Modeling | 2023",
+            "detail": "A one-page setup for testing model votes and walk-forward validation.",
+            "link": None,
+        },
+    ],
     "courses": [
         {
             "name": "AP US History",

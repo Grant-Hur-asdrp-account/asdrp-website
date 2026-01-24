@@ -162,6 +162,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initNavbarOffcanvas();
 
+    const initArtifactDrawer = () => {
+        const drawer = document.querySelector("[data-artifact-drawer]");
+        if (!drawer) {
+            return;
+        }
+
+        const toggle = drawer.querySelector("[data-artifact-toggle]");
+        const panel = drawer.querySelector("[data-artifact-panel]");
+        if (!toggle || !panel) {
+            return;
+        }
+
+        const setOpen = (open) => {
+            drawer.classList.toggle("is-open", open);
+            toggle.setAttribute("aria-expanded", open ? "true" : "false");
+            panel.setAttribute("aria-hidden", open ? "false" : "true");
+            if (open) {
+                panel.focus({ preventScroll: true });
+            }
+        };
+
+        setOpen(false);
+
+        toggle.addEventListener("click", () => {
+            setOpen(!drawer.classList.contains("is-open"));
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!drawer.classList.contains("is-open")) {
+                return;
+            }
+            if (drawer.contains(event.target)) {
+                return;
+            }
+            setOpen(false);
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key !== "Escape") {
+                return;
+            }
+            if (!drawer.classList.contains("is-open")) {
+                return;
+            }
+            setOpen(false);
+            toggle.focus({ preventScroll: true });
+        });
+    };
+
+    initArtifactDrawer();
+
     window.requestAnimationFrame(() => {
         document.body.classList.add("page-loaded");
     });

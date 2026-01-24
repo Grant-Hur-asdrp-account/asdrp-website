@@ -169,4 +169,51 @@
         </div>
     </div>
 </section>
+<div class="artifact-drawer" data-artifact-drawer>
+    <button
+        class="artifact-toggle"
+        type="button"
+        data-artifact-toggle
+        aria-expanded="false"
+        aria-controls="artifact-panel"
+    >
+        Artifacts
+    </button>
+    <div
+        class="artifact-panel"
+        id="artifact-panel"
+        data-artifact-panel
+        role="region"
+        aria-label="Personal artifacts"
+        aria-hidden="true"
+        tabindex="-1"
+    >
+        <div class="artifact-header">
+            <p class="text-uppercase fw-semibold text-primary small mb-1">Artifacts</p>
+            <h3 class="h6 mb-2">Personal drawer</h3>
+            <p class="text-muted small mb-3">
+                Small snapshots from builds, sketches, and experiments.
+            </p>
+        </div>
+        <ul class="artifact-list">
+            {% for artifact in artifacts %}
+            <li class="artifact-item">
+                <div class="artifact-title">{{ artifact.title }}</div>
+                <div class="artifact-meta text-muted small">{{ artifact.meta }}</div>
+                <p class="artifact-detail mb-0">{{ artifact.detail }}</p>
+                {% if artifact.link %}
+                <a
+                    class="artifact-link"
+                    href="{{ artifact.link }}"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    View
+                </a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}

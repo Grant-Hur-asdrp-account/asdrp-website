@@ -2,6 +2,7 @@
     --slate-50: #f8fafc;
     --slate-900: #0f172a;
     --primary: #2563eb;
+    --scroll-progress-height: 6px;
 }
 
 html {
@@ -12,6 +13,10 @@ body {
     background-color: var(--slate-50);
     color: var(--slate-900);
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.navbar.sticky-top {
+    top: var(--scroll-progress-height);
 }
 
 .js-enabled body {
@@ -183,23 +188,123 @@ code {
 }
 
 .scroll-section {
-    scroll-margin-top: 96px;
+    scroll-margin-top: calc(96px + var(--scroll-progress-height));
 }
 
 .nav-backdrop {
     display: none;
 }
 
+.artifact-drawer {
+    position: fixed;
+    right: 1.5rem;
+    bottom: clamp(0.4rem, 4vh, 2.5rem);
+    z-index: 1070;
+}
+
+.artifact-toggle {
+    border: none;
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.24);
+}
+
+.artifact-toggle:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.3);
+    outline-offset: 3px;
+}
+
+.artifact-panel {
+    position: absolute;
+    right: calc(100% + 0.85rem);
+    bottom: 0;
+    width: min(320px, 78vw);
+    max-height: 70vh;
+    padding: 1rem 1.15rem;
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.16);
+    transform: translateX(18px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+    overflow-y: auto;
+}
+
+.artifact-drawer.is-open .artifact-panel {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.artifact-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.artifact-item {
+    border-radius: 0.85rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: #f8fafc;
+    padding: 0.75rem 0.85rem;
+}
+
+.artifact-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.artifact-meta {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    margin-top: 0.2rem;
+}
+
+.artifact-detail {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.artifact-link {
+    display: inline-flex;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.artifact-link:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 991.98px) {
+    .artifact-drawer {
+        display: none;
+    }
+
     .navbar {
         z-index: 1100;
+    }
+
+    .navbar-toggler {
+        position: relative;
+        z-index: 1110;
     }
 
     .navbar-collapse {
         position: fixed;
         top: 0;
         right: 0;
-        height: 100vh !important;
         width: min(80vw, 320px);
         padding: 4.5rem 1.5rem 1.5rem;
         background: #ffffff;
@@ -215,7 +320,7 @@ code {
         transform: translateX(0);
     }
 
-    .navbar-collapse.collapsing {
+    .navbar-collapse.show {
         height: 100vh;
     }
 
@@ -258,7 +363,7 @@ code {
     position: fixed;
     top: 0;
     left: 0;
-    height: 6px;
+    height: var(--scroll-progress-height);
     width: 100%;
     background: rgba(15, 23, 42, 0.18);
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
@@ -298,6 +403,10 @@ code {
     .js-enabled [data-reveal] {
         opacity: 1;
         transform: none;
+        transition: none;
+    }
+
+    .artifact-panel {
         transition: none;
     }
 }
