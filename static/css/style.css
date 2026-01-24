@@ -3,6 +3,8 @@
     --slate-900: #0f172a;
     --primary: #2563eb;
     --scroll-progress-height: 6px;
+    --navbar-height: 64px;
+    --safe-area-top: env(safe-area-inset-top, 0px);
 }
 
 html {
@@ -16,7 +18,7 @@ body {
 }
 
 .navbar.sticky-top {
-    top: var(--scroll-progress-height);
+    top: calc(var(--scroll-progress-height) + var(--safe-area-top));
 }
 
 .js-enabled body {
@@ -186,6 +188,20 @@ body {
     }
 }
 
+@media (max-width: 991.98px), (hover: none) {
+    .navbar.sticky-top {
+        position: fixed;
+        left: 0;
+        right: 0;
+    }
+
+    main {
+        padding-top: calc(
+            3rem + var(--navbar-height) + var(--scroll-progress-height) + var(--safe-area-top)
+        );
+    }
+}
+
 @media (min-width: 992px) {
     .timeline-scroll {
         max-height: 65vh;
@@ -212,7 +228,9 @@ code {
 }
 
 .scroll-section {
-    scroll-margin-top: calc(96px + var(--scroll-progress-height));
+    scroll-margin-top: calc(
+        96px + var(--scroll-progress-height) + var(--safe-area-top)
+    );
 }
 
 .nav-backdrop {
@@ -387,16 +405,20 @@ code {
     position: fixed;
     top: 0;
     left: 0;
-    height: var(--scroll-progress-height);
+    height: calc(var(--scroll-progress-height) + var(--safe-area-top));
     width: 100%;
     background: #e2e8f0;
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
     z-index: 1110;
     pointer-events: none;
+    overflow: hidden;
 }
 
 .scroll-progress__bar {
-    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: var(--scroll-progress-height);
     width: 100%;
     transform-origin: left;
     transform: scaleX(0);

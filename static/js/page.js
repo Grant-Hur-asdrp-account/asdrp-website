@@ -1,6 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.classList.add("js-enabled");
 
+    const initNavbarHeight = () => {
+        const nav = document.querySelector(".navbar");
+        if (!nav) {
+            return;
+        }
+
+        const update = () => {
+            const height = nav.getBoundingClientRect().height;
+            if (height > 0) {
+                document.documentElement.style.setProperty(
+                    "--navbar-height",
+                    `${height}px`
+                );
+            }
+        };
+
+        update();
+        window.addEventListener("resize", update);
+        window.addEventListener("orientationchange", update);
+    };
+
     const initScrollProgress = () => {
         const bar = document.querySelector("[data-scroll-progress]");
         if (!bar) {
@@ -77,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateProgress();
     };
 
+    initNavbarHeight();
     initScrollProgress();
 
     const initNavbarOffcanvas = () => {
