@@ -195,9 +195,9 @@ body {
         right: 0;
     }
 
-    main {
+    main.py-5 {
         padding-top: calc(
-            3rem + var(--navbar-height) + var(--scroll-progress-height) + var(--safe-area-top)
+            1.5rem + var(--navbar-height) + var(--scroll-progress-height) + var(--safe-area-top)
         ) !important;
     }
 }
