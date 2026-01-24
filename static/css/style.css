@@ -389,7 +389,7 @@ code {
     left: 0;
     height: var(--scroll-progress-height);
     width: 100%;
-    background: rgba(15, 23, 42, 0.18);
+    background: #e2e8f0;
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
     z-index: 1110;
     pointer-events: none;
