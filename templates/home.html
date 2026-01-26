@@ -29,7 +29,7 @@
 </section>
 
 <section id="featured" class="scroll-section mt-5">
-    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-2">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-2" data-timeline-lock>
         <div>
             <p class="text-uppercase fw-semibold text-primary small mb-2" data-reveal>
                 Featured Project
@@ -85,11 +85,14 @@
             </p>
             <h2 class="h3 mb-0" data-reveal>Key Moments So Far</h2>
             <p class="text-muted mt-2" data-reveal>
-                A quick timeline of the moments that shaped my interests in building and research.
+                <span class="d-none d-md-inline">
+                    A quick timeline of the moments that shaped my interests in building and research.
+                </span>
+                <span class="d-inline d-md-none">A quick timeline of key moments.</span>
             </p>
         </div>
     </div>
-    <div class="timeline-shell" data-timeline-lock>
+    <div class="timeline-shell">
         <div class="timeline-scroll" data-timeline-scroll>
             <div class="timeline">
                 {% for item in milestones %}

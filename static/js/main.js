@@ -107,7 +107,18 @@ const initTimelineScrollLock = () => {
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
     const html = document.documentElement;
-    const lockOffset = 190;
+    const getLockOffset = () => {
+        const styles = getComputedStyle(document.documentElement);
+        const navHeight = parseFloat(styles.getPropertyValue("--navbar-height")) || 0;
+        const progressHeight =
+            parseFloat(styles.getPropertyValue("--scroll-progress-height")) || 0;
+        const safeAreaTop =
+            parseFloat(styles.getPropertyValue("--safe-area-top")) || 0;
+        const timelinePad =
+            parseFloat(styles.getPropertyValue("--timeline-lock-padding")) || 32;
+        return navHeight + progressHeight + safeAreaTop + timelinePad;
+    };
+    let lockOffset = getLockOffset();
     window.__timelineLockOffset = lockOffset;
     let locked = false;
     let lockAnimating = false;
@@ -244,6 +255,8 @@ const initTimelineScrollLock = () => {
         scheduleScrollBehaviorRestore();
     };
     const refreshLockMetrics = () => {
+        lockOffset = getLockOffset();
+        window.__timelineLockOffset = lockOffset;
         if (!isScrollable()) {
             if (locked) {
                 unlockScroll();
@@ -425,6 +438,7 @@ const initTimelineScrollLock = () => {
 
     window.addEventListener("scroll", onWindowScroll, { passive: true });
     window.addEventListener("resize", refreshLockMetrics);
+    window.addEventListener("load", refreshLockMetrics);
 
     window.addEventListener(
         "wheel",

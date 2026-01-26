@@ -1,6 +1,5 @@
 # Build Journal
 
-## 2025-01-14 &mdash; Build Day
 
 ### Morning: Foundations
 - **Timeline**: Initialized the Flask repo, created `.venv`, installed
@@ -14,7 +13,7 @@
   structure with a left-aligned description, right-aligned profile photo, and
   keyword chips similar to tags on GitHub/itch.io project pages so recruiters
   can scan important terms (AI, Flask, Swift, etc.). The blue/white palette felt
-  familiar from other tech portfolios—it stays minimal yet modern without drawing
+  nice. It stays minimal yet modern without drawing
   attention away from the content.
 - **Resources Used**: Flask documentation (routing/context processors), Bootstrap
   5 navbar + hero examples, Flask-WTF quickstart for CSRF/validation patterns.
@@ -41,7 +40,7 @@
 - **What I Learned**: Keep deploy commands minimal so troubleshooting is easy.
   Shipping placeholder assets avoids broken layouts while waiting for real media.
 
-### Afternoon: Content & Case Studies
+### Afternoon: Content
 - **Timeline**: Wrote detailed entries for ASDRP Mobile App and Project Deep
   Freezer (strengths/limitations/internal badges). Added personal projects
   SantaFest (`gran4/RTSGameV2`) and AI-InvestiBot (`gran4/AI-InvestiBot`), updated
@@ -64,7 +63,7 @@
   like a case study. Internal projects need badges instead of dead “View on
   GitHub” buttons.
 
-### Evening: Polish + Placeholder Resume
+### Evening: 
 - **Timeline**: Converted `base.html` to use `d-flex flex-column min-vh-100`
   with `main.flex-grow-1` so the footer stays pinned at the bottom. Authored a
   temporary resume PDF summarizing core projects/skills/contact info and placed
@@ -81,7 +80,7 @@
   Capturing thought process/resources/challenges right after each milestone
   keeps this journal accurate for the assignment.
 
-## 2025-01-14 &mdash; Later Updates
+
 
 ### Layout & Navigation Adjustments
 - **Timeline**: Reworked the home page into a scrollytelling overview, then

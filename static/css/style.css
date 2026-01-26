@@ -5,6 +5,7 @@
     --scroll-progress-height: 6px;
     --navbar-height: 64px;
     --safe-area-top: env(safe-area-inset-top, 0px);
+    --timeline-lock-padding: 16px;
 }
 
 html {
