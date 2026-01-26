@@ -2,6 +2,13 @@
 
 ## Current Iteration
 
+### Timeline Scroll Lock Stabilization
+- **Timeline**: Normalized wheel deltas with `deltaMode` handling, added a `ResizeObserver` to refresh lock metrics on timeline size changes, tightened the release guard so it re-locks if you cross the lock point while still in the release buffer, and added a small edge-exit accumulator so tiny deltas can exit at the top/bottom without skipping the lock. Switched the wheel listener to capture and removed `overscroll-behavior: contain` on the timeline scroller so hover scrolling matches the rest of the page.
+- **Thought Process**: Trackpad input and hover scroll chaining were creating inconsistent lock behavior, so I focused on making the lock’s entry/exit rules deterministic across devices and cursor positions.
+- **Resources Used**: Wheel event docs (`deltaMode`) and on-page testing with Mac trackpad scroll.
+- **Challenges**: Avoiding accidental lock skips while still allowing small edge-exit scrolls required balancing tiny delta handling with the release buffer.
+- **What I Learned**: Scrollytelling locks need both normalized input and clear re-entry rules to prevent hover-specific “escape” paths.
+
 ### Copy + Tone Cleanup
 - **Timeline**: Updated the hero bio/tagline to sound more specific, removed generic phrases like "problem solver," removed the star badge on the home page, adjusted the About copy to focus on software + design, and trimmed the timeline intro copy for small screens.
 - **Thought Process**: Specific roles and outputs read more authentic than broad claims.

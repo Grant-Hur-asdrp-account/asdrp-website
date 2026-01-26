@@ -107,6 +107,29 @@ const initTimelineScrollLock = () => {
 
     const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
     const html = document.documentElement;
+    const getLineHeight = () => {
+        const bodyStyle = window.getComputedStyle(document.body);
+        const htmlStyle = window.getComputedStyle(document.documentElement);
+        const bodyLine = parseFloat(bodyStyle.lineHeight);
+        if (Number.isFinite(bodyLine)) {
+            return bodyLine;
+        }
+        const htmlLine = parseFloat(htmlStyle.lineHeight);
+        if (Number.isFinite(htmlLine)) {
+            return htmlLine;
+        }
+        const fontSize = parseFloat(htmlStyle.fontSize);
+        return Number.isFinite(fontSize) ? fontSize * 1.2 : 16;
+    };
+    const getWheelDelta = (event) => {
+        let delta = event.deltaY;
+        if (event.deltaMode === 1) {
+            delta *= getLineHeight();
+        } else if (event.deltaMode === 2) {
+            delta *= window.innerHeight;
+        }
+        return delta;
+    };
     const getLockOffset = () => {
         const styles = getComputedStyle(document.documentElement);
         const navHeight = parseFloat(styles.getPropertyValue("--navbar-height")) || 0;
@@ -216,6 +239,8 @@ const initTimelineScrollLock = () => {
     let restoreScrollRaf = null;
     let windowKeyRaf = null;
     let windowKeyPending = 0;
+    let edgeExitCarry = 0;
+    let edgeExitDir = 0;
     const isTimelineTarget = (target) => {
         if (!target) {
             return false;
@@ -408,11 +433,13 @@ const initTimelineScrollLock = () => {
             const buffer = unlockBuffer;
             const exitedUp = currentY < lockY - buffer;
             const exitedDown = currentY > lockY + buffer;
-            if (exitedUp || exitedDown) {
+            const crossed = crossedLock(lastScrollY, currentY);
+            if (exitedUp || exitedDown || crossed) {
                 released = false;
+            } else {
+                lastScrollY = currentY;
+                return;
             }
-            lastScrollY = currentY;
-            return;
         }
 
         if (!locked) {
@@ -446,6 +473,21 @@ const initTimelineScrollLock = () => {
     window.addEventListener("scroll", onWindowScroll, { passive: true });
     window.addEventListener("resize", refreshLockMetrics);
     window.addEventListener("load", refreshLockMetrics);
+    if ("ResizeObserver" in window) {
+        let resizeRaf = null;
+        const scheduleRefresh = () => {
+            if (resizeRaf) {
+                return;
+            }
+            resizeRaf = requestAnimationFrame(() => {
+                resizeRaf = null;
+                refreshLockMetrics();
+            });
+        };
+        const resizeObserver = new ResizeObserver(scheduleRefresh);
+        resizeObserver.observe(section);
+        resizeObserver.observe(scroller);
+    }
 
     window.addEventListener(
         "wheel",
@@ -467,23 +509,47 @@ const initTimelineScrollLock = () => {
             }
 
             if (!locked) {
-                const predictedY = window.scrollY + event.deltaY;
+                const predictedY = window.scrollY + getWheelDelta(event);
                 if (crossedLock(window.scrollY, predictedY)) {
                     event.preventDefault();
                     const targetLockY = getLockY();
                     const distanceToLock = targetLockY - window.scrollY;
-                    const carry = event.deltaY - distanceToLock;
+                    const carry = getWheelDelta(event) - distanceToLock;
                     lockWithCarry(carry);
                 }
                 return;
             }
 
-            const rawDelta = event.deltaY;
+            const rawDelta = getWheelDelta(event);
+            const maxScroll = scroller.scrollHeight - scroller.clientHeight;
+            const atTop = scroller.scrollTop <= 1;
+            const atBottom = scroller.scrollTop >= maxScroll - 1;
+            const wantsUp = rawDelta < 0;
+            const wantsDown = rawDelta > 0;
+            if ((atTop && wantsUp) || (atBottom && wantsDown)) {
+                event.preventDefault();
+                const dir = Math.sign(rawDelta);
+                if (edgeExitDir !== 0 && dir !== edgeExitDir) {
+                    edgeExitCarry = 0;
+                }
+                edgeExitDir = dir;
+                edgeExitCarry += rawDelta;
+                if (Math.abs(edgeExitCarry) >= 24) {
+                    const carry = edgeExitCarry;
+                    edgeExitCarry = 0;
+                    edgeExitDir = 0;
+                    unlockScroll();
+                    applyWindowScrollBy(carry);
+                }
+                return;
+            }
+            edgeExitCarry = 0;
+            edgeExitDir = 0;
             const delta = rawDelta * wheelSpeed;
             event.preventDefault();
             scrollTimelineBy(delta, rawDelta);
         },
-        { passive: false }
+        { passive: false, capture: true }
     );
 
     window.addEventListener("keydown", (event) => {

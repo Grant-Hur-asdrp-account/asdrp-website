@@ -153,11 +153,11 @@ body {
     padding: 1.5rem;
 }
 
+
 .timeline-scroll {
     max-height: 70vh;
     overflow: hidden;
     padding-right: 1rem;
-    overscroll-behavior: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
