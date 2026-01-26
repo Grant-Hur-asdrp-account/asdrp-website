@@ -7,11 +7,10 @@ PORTFOLIO = {
         "school": "The King's Academy",
         "location": "San Jose, CA",
         "bio": (
-            "Aspiring engineer blending software, hardware, and design to build "
-            "lab tools and student-facing apps. I enjoy shipping reliable Python "
-            "with clean UX."
+            "Aspiring engineer blending software and design to build student-facing "
+            "apps. I enjoy shipping reliable Python with clean UX."
         ),
-        "tagline": "Student Researcher • Lab Tools • Software + Hardware",
+        "tagline": "Student Researcher • Software • Design",
         "photo": "images/profile.png",
         "resume_static_path": "documents/resume-placeholder.pdf",
         "email": "grant.hur@students.asdrp.org",
