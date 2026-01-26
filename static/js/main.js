@@ -90,7 +90,7 @@ const initTimelineScrollLock = () => {
     const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
     const isTouchDevice =
         "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isSmallScreen || isCoarsePointer || isTouchDevice) {
+    if (isCoarsePointer || (isSmallScreen && isTouchDevice)) {
         return;
     }
 
@@ -114,8 +114,15 @@ const initTimelineScrollLock = () => {
             parseFloat(styles.getPropertyValue("--scroll-progress-height")) || 0;
         const safeAreaTop =
             parseFloat(styles.getPropertyValue("--safe-area-top")) || 0;
-        const timelinePad =
+        const basePad =
             parseFloat(styles.getPropertyValue("--timeline-lock-padding")) || 32;
+        const shortPad = parseFloat(
+            styles.getPropertyValue("--timeline-lock-padding-short")
+        );
+        const timelinePad =
+            window.innerHeight < 700 && Number.isFinite(shortPad)
+                ? shortPad
+                : basePad;
         return navHeight + progressHeight + safeAreaTop + timelinePad;
     };
     let lockOffset = getLockOffset();
