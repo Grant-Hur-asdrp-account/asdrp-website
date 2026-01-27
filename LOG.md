@@ -9,6 +9,13 @@
 - **Challenges**: Avoiding accidental lock skips while still allowing small edge-exit scrolls required balancing tiny delta handling with the release buffer.
 - **What I Learned**: Scrollytelling locks need both normalized input and clear re-entry rules to prevent hover-specific “escape” paths.
 
+### Tone + Personalization Pass
+- **Timeline**: Rewrote the home/about copy to remove AI-sounding phrases, tightened course intro text, and refreshed project descriptions to sound more direct. Replaced the artifacts list with personal tidbits and added an optional artifact image slot in the drawer, including placeholders for adding a food photo.
+- **Thought Process**: The portfolio should sound like a real person’s voice and include personal hooks that feel specific without being forced.
+- **Resources Used**: On-page copy review and content notes from the user.
+- **Challenges**: Keeping copy concise while still sounding human and distinct.
+- **What I Learned**: Small, specific details make the site feel more believable than abstract phrasing.
+
 ### Copy + Tone Cleanup
 - **Timeline**: Updated the hero bio/tagline to sound more specific, removed generic phrases like "problem solver," removed the star badge on the home page, adjusted the About copy to focus on software + design, and trimmed the timeline intro copy for small screens.
 - **Thought Process**: Specific roles and outputs read more authentic than broad claims.
