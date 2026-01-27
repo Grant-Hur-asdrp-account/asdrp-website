@@ -6,10 +6,7 @@ PORTFOLIO = {
         "grade": "12th Grade",
         "school": "The King's Academy",
         "location": "San Jose, CA",
-        "bio": (
-            "Aspiring engineer blending software and design to build student-facing "
-            "apps. I enjoy shipping reliable Python with clean UX."
-        ),
+        "bio": "Student engineer building tools for ASDRP and school labs.",
         "tagline": "Student Researcher • Software • Design",
         "photo": "images/profile.png",
         "resume_static_path": "documents/resume-placeholder.pdf",
@@ -23,21 +20,48 @@ PORTFOLIO = {
     },
     "artifacts": [
         {
-            "title": "Freezer OCR test log",
-            "meta": "Lab monitoring | 2024",
-            "detail": "Notes from OCR calibration runs and the edge cases that broke early builds.",
+            "title": "🍳 Favorite recipe",
+            "meta": "Cooking | Ongoing",
+            "detail": "Fried chicken (latest recipe experiment).",
+            "image": None,
+            "image_alt": "Fried chicken",
+            "image_slot": True,
             "link": None,
         },
         {
-            "title": "Mobile app onboarding sketch",
-            "meta": "ASDRP iOS | 2025",
-            "detail": "Storyboard snippet mapping the student onboarding flow and lab selection.",
+            "title": "🧠 Skill I’m learning",
+            "meta": "Learning | Now",
+            "detail": "This website right now.",
+            "image": None,
+            "image_alt": None,
+            "image_slot": False,
             "link": None,
         },
         {
-            "title": "AI-InvestiBot experiment card",
-            "meta": "Modeling | 2023",
-            "detail": "A one-page setup for testing model votes and walk-forward validation.",
+            "title": "📚 Most influential book",
+            "meta": "Reading | Ongoing",
+            "detail": "Titans of History by Simon Sebag Montefiore.",
+            "image": None,
+            "image_alt": None,
+            "image_slot": False,
+            "link": None,
+        },
+        {
+            "title": "⚽ Soccer highlight",
+            "meta": "Soccer | Highlight",
+            "detail": "Almaden Soccer Club, 9th grade, hit a long penalty as a defender from 30 to 40m.",
+            "image": None,
+            "image_alt": None,
+            "image_slot": False,
+            "link": None,
+        },
+        {
+            "title": "🕹️ Civ 6 player",
+            "meta": "Games | Ongoing",
+            "detail": "One of my first real games. Domination is best because of snowballing. Civ 6 > Civ 7.",
+            "image": None,
+            "image_alt": None,
+            "image_slot": False,
             "link": None,
         },
     ],
@@ -132,10 +156,9 @@ PORTFOLIO = {
             {
                 "title": "ASDRP Mobile App",
                 "description": (
-                    "An in-progress iOS application that centralizes ASDRP logistics so "
-                    "students and advisors only see the information relevant to their "
-                    "department, lab, and current deadlines. It consolidates scattered "
-                    "emails, calendars, and attendance tools into one personalized feed."
+                    "In-progress iOS app that centralizes ASDRP logistics (deadlines, "
+                    "attendance, and lab updates). Students and advisors see only their "
+                    "lab’s info instead of scattered emails and calendars."
                 ),
                 "technologies": ["Swift", "Firebase Auth", "Firestore"],
                 "link": None,
@@ -145,23 +168,24 @@ PORTFOLIO = {
                     "Built the profile explorer that lets students browse labs and connect like a lightweight LinkedIn.",
                 ],
                 "status_note": (
-                    "Project is ongoing: iOS build is live for internal testing; Kotlin port and chatbot are planned next."
+                    "Project is ongoing. The iOS build is live for internal testing. "
+                    "Kotlin port and chatbot are planned next."
                 ),
                 "strengths": [
                     "Tailors announcements per lab, reducing noise from mass emails.",
                     "Integrates attendance tracking with Firebase for reliable timestamps.",
                 ],
                 "limitations": [
-                    "Currently available only on iOS; Android support will follow in later phases.",
+                    "Currently available only on iOS. Android support will follow in later phases.",
                     "Requires strong campus Wi-Fi for real-time syncing.",
                 ],
             },
             {
                 "title": "Project Deep Freezer",
                 "description": (
-                    "Built a low-cost, done-and-documented freezer monitoring system that "
-                    "uses a Raspberry Pi camera and OCR to read ultra-low temperature "
-                    "displays and raise PagerDuty alerts when anything drifts out of range."
+                    "Raspberry Pi + camera system that reads ultra-low temp displays with OCR "
+                    "and triggers PagerDuty alerts when temps drift. Built to be low cost and "
+                    "easy for labs to document and maintain."
                 ),
                 "technologies": ["Raspberry Pi", "OpenCV", "EasyOCR", "PagerDuty"],
                 "link": None,
@@ -171,7 +195,9 @@ PORTFOLIO = {
                     "Implemented automated unit tests for the OCR pipeline to reduce false alarms.",
                     "Built the UI for selecting the region of interest so the camera zooms on the correct digits.",
                 ],
-                "status_note": "Project is done and ready for extended lab testing; accuracy still depends on lighting/placement.",
+                "status_note": (
+                    "Project is done and ready for extended lab testing. Accuracy still depends on lighting and placement."
+                ),
                 "strengths": [
                     "Low cost—no subscriptions or vendor lock-in.",
                     "Installs without probes or freezer modifications.",
@@ -187,10 +213,9 @@ PORTFOLIO = {
             {
                 "title": "SantaFest Destiny",
                 "description": (
-                    "A fast-paced real-time strategy game about building Santa's workshop "
-                    "across procedurally generated snowy islands while meeting gift quotas "
-                    "and surviving child raids. Each failed run feeds permanent upgrades "
-                    "for the next attempt."
+                    "Real-time strategy game where you build Santa’s workshop across "
+                    "procedurally generated islands, hit gift quotas, and survive raids. "
+                    "Runs include permanent upgrades for the next attempt."
                 ),
                 "technologies": ["Arcade 3", "Python"],
                 "link": "https://github.com/gran4/RTSGameV2",
@@ -200,14 +225,14 @@ PORTFOLIO = {
                     "Iterated on adjustable game speed, save system, and permanent progression UI.",
                     "Started in a middle-school elective and kept expanding through self-study.",
                 ],
-                "status_note": "Actively maintained hobby project with ongoing content updates.",
+                "status_note": "Paused for now. I plan to come back to it.",
             },
             {
                 "title": "AI-InvestiBot",
                 "description": (
-                    "An experimental stock-modeling framework that lets me compare "
-                    "indicator-heavy LSTM architectures, walk-forward validation setups, "
-                    "and automated decision votes without touching live markets."
+                    "Experiment harness for stock modeling: LSTM models + indicators, "
+                    "walk-forward validation, and a voting layer to compare strategies "
+                    "without touching live markets."
                 ),
                 "technologies": ["Python", "PyTorch", "Pandas"],
                 "link": "https://github.com/gran4/AI-InvestiBot",
@@ -217,7 +242,7 @@ PORTFOLIO = {
                     "Decision layer aggregates multiple strategy votes so I can compare price, return, and directional models.",
                 ],
                 "status_note": (
-                    "Core training + validation loop works; I’m iterating on additional tests "
+                    "Core training + validation loop works. I’m iterating on additional tests "
                     "and refinements before automating more strategies."
                 ),
             },

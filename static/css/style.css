@@ -140,7 +140,7 @@ body {
     object-fit: contain;
 }
 
-.timeline-image--app img {
+.timeline-image-app img {
     border-radius: 1rem;
     border: 1px solid rgba(15, 23, 42, 0.08);
     background: #ffffff;
@@ -309,6 +309,30 @@ code {
 .artifact-detail {
     font-size: 0.85rem;
     margin-top: 0.5rem;
+}
+
+.artifact-media {
+    margin-top: 0.6rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.artifact-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.artifact-media-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90px;
+    font-size: 0.8rem;
+    color: rgba(15, 23, 42, 0.6);
+    background: #ffffff;
 }
 
 .artifact-link {
