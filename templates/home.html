@@ -136,7 +136,7 @@
         </div>
         <div class="col-12 col-md-6" data-reveal>
             <div class="p-4 border rounded-4 h-100 bg-white shadow-sm">
-                <h2 class="h4">Interests</h2>
+                <h2 class="h4">Interests & Favorites</h2>
                 <ul class="list-unstyled mt-3 mb-0">
                     {% for interest in interests %}
                     <li class="mb-2 d-flex align-items-start gap-2">
@@ -149,6 +149,48 @@
                 </a>
             </div>
         </div>
+    </div>
+</section>
+
+<section id="shelf" class="scroll-section mt-5">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end mb-3 gap-2">
+        <div>
+            <p class="text-uppercase fw-semibold text-primary small mb-2" data-reveal>
+                Personal Shelf
+            </p>
+            <h2 class="h3 mb-0" data-reveal>Snapshots & Notes</h2>
+            <p class="text-muted mt-2" data-reveal>
+                A flexible spot for photos, clips, and quick memories.
+            </p>
+        </div>
+    </div>
+    <div class="shelf-grid">
+        {% for item in shelf_items %}
+        <article class="shelf-card" data-reveal>
+            {% if item.media %}
+            <div class="shelf-media">
+                {% if item.media_type == "video" %}
+                <video controls preload="metadata" aria-label="{{ item.media_alt or item.title }}">
+                    <source src="{{ url_for('static', filename=item.media) }}" type="video/mp4" />
+                </video>
+                {% else %}
+                <img
+                    src="{{ url_for('static', filename=item.media) }}"
+                    alt="{{ item.media_alt or item.title }}"
+                    class="is-expandable"
+                    data-expandable
+                    data-expandable-caption="{{ item.title }}"
+                />
+                {% endif %}
+            </div>
+            {% endif %}
+            <div class="shelf-body">
+                <p class="shelf-meta text-uppercase fw-semibold small mb-1">{{ item.meta }}</p>
+                <h3 class="h6 mb-2">{{ item.title }}</h3>
+                <p class="text-muted small mb-0">{{ item.detail }}</p>
+            </div>
+        </article>
+        {% endfor %}
     </div>
 </section>
 
@@ -179,22 +221,22 @@
         aria-expanded="false"
         aria-controls="artifact-panel"
     >
-        Artifacts
+        Kitchen Notes
     </button>
     <div
         class="artifact-panel"
         id="artifact-panel"
         data-artifact-panel
         role="region"
-        aria-label="Personal artifacts"
+        aria-label="Cooked dishes"
         aria-hidden="true"
         tabindex="-1"
     >
         <div class="artifact-header">
-            <p class="text-uppercase fw-semibold text-primary small mb-1">Artifacts</p>
-            <h3 class="h6 mb-2">Personal drawer</h3>
+            <p class="kitchen-label text-uppercase fw-semibold small mb-1">Kitchen Notes</p>
+            <h3 class="h6 mb-2">From my kitchen</h3>
             <p class="text-muted small mb-3">
-                Short notes from builds, sketches, and test runs.
+                A few dishes I cooked and want to remember.
             </p>
         </div>
         <ul class="artifact-list">
@@ -208,10 +250,13 @@
                     <img
                         src="{{ url_for('static', filename=artifact.image) }}"
                         alt="{{ artifact.image_alt or artifact.title }}"
+                        class="is-expandable"
+                        data-expandable
+                        data-expandable-caption="{{ artifact.title }}"
                     />
                 </div>
                 {% elif artifact.image_slot %}
-                <div class="artifact-media artifact-media-placeholder">Add a photo</div>
+                <div class="artifact-media artifact-media-placeholder">Add a food photo</div>
                 {% endif %}
                 {% if artifact.link %}
                 <a

@@ -42,6 +42,7 @@ def home():
         featured_project=PORTFOLIO["projects"]["asdrp"][0],
         milestones=PORTFOLIO["milestones"],
         artifacts=PORTFOLIO["artifacts"],
+        shelf_items=PORTFOLIO["shelf_items"],
     )
 
 

@@ -235,6 +235,96 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initArtifactDrawer();
 
+    const initExpandableImages = () => {
+        const images = document.querySelectorAll("img");
+        images.forEach((img) => {
+            if (img.closest(".lightbox")) {
+                return;
+            }
+            if (img.hasAttribute("data-no-expand")) {
+                return;
+            }
+            if (!img.hasAttribute("data-expandable")) {
+                img.setAttribute("data-expandable", "");
+            }
+            img.classList.add("is-expandable");
+        });
+    };
+
+    initExpandableImages();
+
+    const initLightbox = () => {
+        const lightbox = document.querySelector("[data-lightbox]");
+        if (!lightbox) {
+            return;
+        }
+
+        const overlay = lightbox.querySelector("[data-lightbox-overlay]");
+        const closeButton = lightbox.querySelector("[data-lightbox-close]");
+        const image = lightbox.querySelector("[data-lightbox-image]");
+        const caption = lightbox.querySelector("[data-lightbox-caption]");
+
+        if (!overlay || !closeButton || !image || !caption) {
+            return;
+        }
+
+        let lastActiveElement = null;
+
+        const openLightbox = (target) => {
+            const src = target.getAttribute("data-full-src") || target.getAttribute("src");
+            if (!src) {
+                return;
+            }
+
+            image.src = src;
+            image.alt = target.getAttribute("alt") || "";
+            caption.textContent =
+                target.getAttribute("data-expandable-caption") ||
+                target.getAttribute("alt") ||
+                "";
+            lightbox.classList.add("is-open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.classList.add("lightbox-open");
+            lastActiveElement = document.activeElement;
+            closeButton.focus({ preventScroll: true });
+        };
+
+        const closeLightbox = () => {
+            if (!lightbox.classList.contains("is-open")) {
+                return;
+            }
+            lightbox.classList.remove("is-open");
+            lightbox.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("lightbox-open");
+            image.removeAttribute("src");
+            caption.textContent = "";
+            if (lastActiveElement) {
+                lastActiveElement.focus({ preventScroll: true });
+            }
+        };
+
+        document.addEventListener("click", (event) => {
+            const target = event.target.closest("[data-expandable]");
+            if (!target) {
+                return;
+            }
+            event.preventDefault();
+            openLightbox(target);
+        });
+
+        overlay.addEventListener("click", closeLightbox);
+        closeButton.addEventListener("click", closeLightbox);
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key !== "Escape") {
+                return;
+            }
+            closeLightbox();
+        });
+    };
+
+    initLightbox();
+
     window.requestAnimationFrame(() => {
         document.body.classList.add("page-loaded");
     });

@@ -2,6 +2,20 @@
 
 ## Current Iteration
 
+### Kitchen Notes + Personal Shelf + Lightbox
+- **Timeline**: Replaced the artifacts drawer content with a food-focused “Kitchen Notes” list and updated the drawer styling to warm, kitchen tones. Added a new “Personal Shelf” section for flexible cards (images or video), populated it with Civ 6, family, and ASDRP advisor notes media, and moved non-food items out of the kitchen list. Swapped the ASDRP advisor notes to an image for immediate visibility. Added a sitewide lightbox so all images expand on click, with an opt-out via `data-no-expand`.
+- **Thought Process**: I needed a clean separation between cooking content and personal snapshots, plus an easy way to add/remove cards without breaking layout. Making the lightbox global removes extra per-section wiring.
+- **Resources Used**: Existing `PORTFOLIO` structure and on-page UI review for the drawer + shelf layout.
+- **Challenges**: Keeping the drawer readable while shifting it to a food theme, and making image expansion work consistently across sections.
+- **What I Learned**: A flexible “shelf” grid is the easiest way to keep personal items tidy without overloading the main sections.
+
+### Timeline Media Updates
+- **Timeline**: Swapped milestone images to real photos (baby photo for “Born” and middle-school trophies for the 3-person basketball win). Increased the iOS app milestone image size so the phone screenshot reads larger instead of tall and narrow.
+- **Thought Process**: Real photos make the timeline feel more personal, and the iOS screenshot needed extra scale to be legible.
+- **Resources Used**: New images in `static/images` and quick CSS tuning for the app-specific milestone image.
+- **Challenges**: Enlarging the phone screenshot without breaking the layout for other timeline images.
+- **What I Learned**: Aspect-ratio outliers (phone screenshots) need tailored sizing rules to feel balanced with landscape visuals.
+
 ### Timeline Scroll Lock Stabilization
 - **Timeline**: Normalized wheel deltas with `deltaMode` handling, added a `ResizeObserver` to refresh lock metrics on timeline size changes, tightened the release guard so it re-locks if you cross the lock point while still in the release buffer, and added a small edge-exit accumulator so tiny deltas can exit at the top/bottom without skipping the lock. Switched the wheel listener to capture and removed `overscroll-behavior: contain` on the timeline scroller so hover scrolling matches the rest of the page.
 - **Thought Process**: Trackpad input and hover scroll chaining were creating inconsistent lock behavior, so I focused on making the lock’s entry/exit rules deterministic across devices and cursor positions.
