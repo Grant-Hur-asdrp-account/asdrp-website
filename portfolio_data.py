@@ -162,8 +162,9 @@ PORTFOLIO = {
                 "title": "ASDRP Mobile App",
                 "description": (
                     "In-progress iOS app that centralizes ASDRP logistics (deadlines, "
-                    "attendance, and lab updates). Students and advisors see only their "
-                    "lab’s info instead of scattered emails and calendars."
+                    "attendance, and lab updates). I cleaned up the system so the info is "
+                    "organized and easy to find, and the profile explorer lets people see "
+                    "other labs and members."
                 ),
                 "technologies": ["Swift", "Firebase Auth", "Firestore"],
                 "link": None,
@@ -201,7 +202,7 @@ PORTFOLIO = {
                     "Built the UI for selecting the region of interest so the camera zooms on the correct digits.",
                 ],
                 "status_note": (
-                    "Project is done and ready for extended lab testing. Accuracy still depends on lighting and placement."
+                    "Project is done. Accuracy still depends on lighting and placement."
                 ),
                 "strengths": [
                     "Low cost—no subscriptions or vendor lock-in.",
@@ -230,7 +231,7 @@ PORTFOLIO = {
                     "Iterated on adjustable game speed, save system, and permanent progression UI.",
                     "Started in a middle-school elective and kept expanding through self-study.",
                 ],
-                "status_note": "Paused for now. I plan to come back to it.",
+                "status_note": "I plan to come back to it.",
             },
             {
                 "title": "AI-InvestiBot",
