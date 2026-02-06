@@ -20,18 +20,24 @@ PORTFOLIO = {
     },
     "artifacts": [
         {
-            "title": "Clam Chowder Pasta",
-            "meta": "Seafood | Cozy",
-            "detail": "Clams, white wine, and parsley in a chowder-style cream sauce.",
+            "title": "Spicy Clam Chowder Linguini",
+            "meta": "Seafood | Spicy",
+            "detail": (
+                "Trader Joe’s clam chowder with onions, spicy butter, smoked cheddar "
+                "blend, and sausage."
+            ),
             "image": "images/Clam Chowder Pasta.jpg",
-            "image_alt": "Clam chowder pasta",
+            "image_alt": "Spicy clam chowder linguini",
             "image_slot": False,
             "link": None,
         },
         {
             "title": "Creamy Miso Ramen",
             "meta": "Noodles | Umami",
-            "detail": "Miso + sesame broth with soft egg, scallions, and chili oil.",
+            "detail": (
+                "Bacon, red pepper flakes, garlic, onion, cream, miso, noodles, salt. "
+                "Finished with egg, kimchi, and sesame seeds."
+            ),
             "image": "images/Creamy Miso Ramen.jpg",
             "image_alt": "Creamy miso ramen",
             "image_slot": False,
@@ -40,43 +46,54 @@ PORTFOLIO = {
         {
             "title": "Fried Chicken",
             "meta": "Comfort | Crispy",
-            "detail": "Brined, double-dredged, and fried for a shattery crust.",
+            "detail": (
+                "Dry brine (salt, pepper, garlic, onion, ginger), mushy rice wet layer, "
+                "potato starch dry layer."
+            ),
             "image": "images/Fried Chicken.jpg",
             "image_alt": "Fried chicken",
             "image_slot": False,
             "link": None,
+            "links": [
+                {
+                    "label": "Soy sauce",
+                    "url": "https://www.youtube.com/watch?v=2DciZkFIKRg",
+                },
+                {
+                    "label": "Cane’s sauce",
+                    "url": "https://www.youtube.com/shorts/QqJOunpRKdA",
+                },
+                {
+                    "label": "Spicy sauce",
+                    "url": "https://www.youtube.com/watch?v=pY7pYr6wFlg",
+                },
+            ],
         },
     ],
     "courses": [
         {
-            "name": "AP US History",
-            "term": "9th Grade",
-            "topics": ["Historical analysis", "Long-form writing"],
-            "score": "5",
+            "name": "AP English Literature",
+            "term": "12th Grade",
+            "topics": ["Literary analysis", "Comparative essays"],
+            "score": None,
         },
         {
-            "name": "AP Precalculus",
-            "term": "10th Grade",
-            "topics": ["Functions", "Modeling", "Trigonometry"],
-            "score": "5",
+            "name": "AP Statistics",
+            "term": "12th Grade",
+            "topics": ["Probability", "Inference"],
+            "score": None,
         },
         {
-            "name": "AP Government & Politics",
-            "term": "10th Grade",
-            "topics": ["Civics", "Policy analysis"],
-            "score": "5",
+            "name": "AP Physics C: Mechanics",
+            "term": "12th Grade",
+            "topics": ["Classical mechanics", "Calculus-based modeling"],
+            "score": None,
         },
         {
-            "name": "AP Computer Science Principles",
-            "term": "10th Grade",
-            "topics": ["Computational thinking", "Creative project"],
-            "score": "5",
-        },
-        {
-            "name": "AP Psychology",
-            "term": "10th Grade",
-            "topics": ["Cognition", "Behavioral science"],
-            "score": "5",
+            "name": "AP World History",
+            "term": "12th Grade",
+            "topics": ["Global perspectives", "Document-based essays"],
+            "score": None,
         },
         {
             "name": "AP English Language & Composition",
@@ -109,28 +126,34 @@ PORTFOLIO = {
             "score": "5",
         },
         {
-            "name": "AP English Literature",
-            "term": "12th Grade",
-            "topics": ["Literary analysis", "Comparative essays"],
-            "score": None,
+            "name": "AP Precalculus",
+            "term": "10th Grade",
+            "topics": ["Functions", "Modeling", "Trigonometry"],
+            "score": "5",
         },
         {
-            "name": "AP Statistics",
-            "term": "12th Grade",
-            "topics": ["Probability", "Inference"],
-            "score": None,
+            "name": "AP Government & Politics",
+            "term": "10th Grade",
+            "topics": ["Civics", "Policy analysis"],
+            "score": "5",
         },
         {
-            "name": "AP Physics C: Mechanics",
-            "term": "12th Grade",
-            "topics": ["Classical mechanics", "Calculus-based modeling"],
-            "score": None,
+            "name": "AP Computer Science Principles",
+            "term": "10th Grade",
+            "topics": ["Computational thinking", "Creative project"],
+            "score": "5",
         },
         {
-            "name": "AP World History",
-            "term": "12th Grade",
-            "topics": ["Global perspectives", "Document-based essays"],
-            "score": None,
+            "name": "AP Psychology",
+            "term": "10th Grade",
+            "topics": ["Cognition", "Behavioral science"],
+            "score": "5",
+        },
+        {
+            "name": "AP US History",
+            "term": "9th Grade",
+            "topics": ["Historical analysis", "Long-form writing"],
+            "score": "5",
         },
     ],
     "projects": {

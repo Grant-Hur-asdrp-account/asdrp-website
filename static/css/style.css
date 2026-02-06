@@ -371,6 +371,17 @@ code {
     text-decoration: underline;
 }
 
+.artifact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.artifact-links .artifact-link {
+    margin-top: 0;
+}
+
 .is-expandable {
     cursor: zoom-in;
 }
