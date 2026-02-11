@@ -9,7 +9,7 @@ PORTFOLIO = {
         "bio": "Student engineer building tools for ASDRP and school labs.",
         "tagline": "Student Researcher • Software • Design",
         "photo": "images/profile.png",
-        "resume_static_path": "documents/resume-placeholder.pdf",
+        "resume_static_path": "documents/grant-hur-resume.pdf",
         "email": "grant.hur@students.asdrp.org",
         "phone": "408-422-1114",
         "socials": {
@@ -224,7 +224,7 @@ PORTFOLIO = {
                     "Runs include permanent upgrades for the next attempt."
                 ),
                 "technologies": ["Arcade 3", "Python"],
-                "link": "https://github.com/gran4/RTSGameV2",
+                "link": "https://ghur.itch.io/santafest-destiny",
                 "image": "images/SantaFestDestiny.png",
                 "highlights": [
                     "Upgraded the engine to Arcade 3 in 2025 for smoother performance and better visuals.",
@@ -248,8 +248,7 @@ PORTFOLIO = {
                     "Decision layer aggregates multiple strategy votes so I can compare price, return, and directional models.",
                 ],
                 "status_note": (
-                    "Core training + validation loop works. I’m iterating on additional tests "
-                    "and refinements before automating more strategies."
+                    "Project completed. I may revisit it later with new datasets and model ideas."
                 ),
             },
         ],
@@ -300,7 +299,7 @@ PORTFOLIO = {
             "image": "images/python for the absolute beginner.jpg",
         },
         {
-            "year": "6th Grade",
+            "year": "Mid 7th Grade",
             "title": "First game build",
             "detail": "Built a game for an elective class and kept iterating on it.",
             "image": "images/SantaFestDestiny.png",

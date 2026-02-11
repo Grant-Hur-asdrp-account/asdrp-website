@@ -1,0 +1,93 @@
+%PDF-1.4
+%
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R /F4 8 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 3976 >>
+stream
+BT /F2 24 Tf 252.00 754.00 Td (Grant Hur) Tj ET
+BT /F1 9 Tf 215.06 734.00 Td (408-422-1114 | grant.hur@students.asdrp.org) Tj ET
+BT /F1 9 Tf 143.15 723.50 Td (www.linkedin.com/feed | github.com/gran4 | github.com/Grant-Hur-asdrp-account) Tj ET
+BT /F2 11 Tf 36.00 708.00 Td (EDUCATION) Tj ET
+0.55 w 0 G 36.00 705.00 m 576.00 705.00 l S
+BT /F2 11 Tf 36.00 695.00 Td (King's Academy's PSP Program) Tj ET
+BT /F2 10 Tf 516.00 695.00 Td (San Jose, CA) Tj ET
+BT /F3 9 Tf 36.00 684.00 Td (High School, 12th Grade) Tj ET
+BT /F3 9 Tf 504.09 684.00 Td (Expected May 2026) Tj ET
+BT /F1 9 Tf 36.00 674.00 Td (- AP Scores: Computer Science A \(5\), Calculus BC \(5\), Chemistry \(5\), Physics 1 \(5\), US History \(5\), Government \(5\),) Tj ET
+BT /F1 9 Tf 45.00 664.50 Td (Precalculus \(5\), Psychology \(5\), CSP \(5\), English Language \(4\).) Tj ET
+BT /F2 11 Tf 36.00 648.00 Td (EXPERIENCE) Tj ET
+0.55 w 0 G 36.00 645.00 m 576.00 645.00 l S
+BT /F2 11 Tf 36.00 635.00 Td (ASDRP Student Researcher) Tj ET
+BT /F2 10 Tf 516.00 635.00 Td (San Jose, CA) Tj ET
+BT /F3 9 Tf 36.00 624.00 Td (Applied Scientific Discovery through Research Program \(ASDRP\)) Tj ET
+BT /F3 9 Tf 436.41 624.00 Td (Summer after 10th Grade - Present) Tj ET
+BT /F1 9 Tf 36.00 614.00 Td (- Built an iOS app that centralizes ASDRP deadlines, attendance, forms, and member discovery.) Tj ET
+BT /F1 9 Tf 36.00 603.50 Td (- Implemented to-do and important-forms modules to provide lab-specific, due-date-driven workflows.) Tj ET
+BT /F1 9 Tf 36.00 593.00 Td (- Developed Project Deep Freezer: Raspberry Pi and OCR monitoring with PagerDuty alerts for freezer temperature risks.) Tj ET
+BT /F2 11 Tf 36.00 579.50 Td (STEM Mentor and AP CSP Support) Tj ET
+BT /F2 10 Tf 516.00 579.50 Td (San Jose, CA) Tj ET
+BT /F3 9 Tf 36.00 568.50 Td (King's Academy Bridge Program) Tj ET
+BT /F3 9 Tf 516.78 568.50 Td (2024 - Present) Tj ET
+BT /F1 9 Tf 36.00 558.50 Td (- Mentor students in school STEM activities and support project planning and debugging.) Tj ET
+BT /F1 9 Tf 36.00 548.00 Td (- Helped teach sections of AP Computer Science Principles through Bridge.) Tj ET
+BT /F2 11 Tf 36.00 531.50 Td (PROJECTS) Tj ET
+0.55 w 0 G 36.00 528.50 m 576.00 528.50 l S
+BT /F2 11 Tf 36.00 518.50 Td (ASDRP Mobile App) Tj ET
+BT /F2 10 Tf 521.00 518.50 Td (In Progress) Tj ET
+BT /F3 9 Tf 36.00 507.50 Td (Swift, Firebase Auth, Firestore) Tj ET
+BT /F1 9 Tf 36.00 497.50 Td (- Designed core student workflows for lab updates, attendance, and tasks in a single iOS interface.) Tj ET
+BT /F1 9 Tf 36.00 487.00 Td (- Implemented profile explorer and internal navigation patterns to improve discoverability across labs.) Tj ET
+BT /F2 11 Tf 36.00 473.50 Td (Project Deep Freezer) Tj ET
+BT /F2 10 Tf 531.00 473.50 Td (Completed) Tj ET
+BT /F3 9 Tf 36.00 462.50 Td (Raspberry Pi, OpenCV, EasyOCR, PagerDuty) Tj ET
+BT /F1 9 Tf 36.00 452.50 Td (- Built low-cost OCR-based freezer monitoring to detect temperature drift from native displays.) Tj ET
+BT /F1 9 Tf 36.00 442.00 Td (- Added ROI selection flow and OCR testing to reduce false alarms and improve reliability.) Tj ET
+BT /F2 11 Tf 36.00 428.50 Td (AI-InvestiBot) Tj ET
+BT /F2 10 Tf 531.00 428.50 Td (Completed) Tj ET
+BT /F3 9 Tf 36.00 417.50 Td (Python, PyTorch, Pandas) Tj ET
+BT /F1 9 Tf 36.00 407.50 Td (- Created a reusable training pipeline with walk-forward validation for stock-model experiments.) Tj ET
+BT /F1 9 Tf 36.00 397.00 Td (- Implemented model-voting evaluation to compare directional and return-based strategies.) Tj ET
+BT /F2 11 Tf 36.00 380.50 Td (TECHNICAL SKILLS) Tj ET
+0.55 w 0 G 36.00 377.50 m 576.00 377.50 l S
+BT /F1 9 Tf 36.00 367.50 Td (Languages: Python, Swift, Java) Tj ET
+BT /F1 9 Tf 36.00 357.50 Td (Frameworks: Flask, Firebase Auth, Firestore, PyTorch, OpenCV, EasyOCR) Tj ET
+BT /F1 9 Tf 36.00 347.50 Td (Developer Tools: Git, GitHub, PagerDuty, Raspberry Pi) Tj ET
+BT /F1 9 Tf 36.00 337.50 Td (Focus Areas: iOS app development, OCR monitoring, applied machine learning) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic >>
+endobj
+8 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-BoldItalic >>
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000011 00000 n 
+0000000060 00000 n 
+0000000117 00000 n 
+0000000273 00000 n 
+0000004301 00000 n 
+0000004373 00000 n 
+0000004444 00000 n 
+0000004517 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+4594
+%%EOF
