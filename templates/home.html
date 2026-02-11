@@ -57,7 +57,7 @@
                 <div class="featured-media">
                     <img
                         src="{{ url_for('static', filename=featured_project.image) }}"
-                        class="project-image featured-image"
+                        class="project-image featured-image{% if featured_project.image == 'images/asdrp-mobile-app.png' %} project-image-app{% endif %}"
                         alt="{{ featured_project.title }} preview"
                     />
                 </div>
@@ -232,58 +232,63 @@
         aria-hidden="true"
         tabindex="-1"
     >
-        <div class="artifact-header">
-            <p class="kitchen-label text-uppercase fw-semibold small mb-1">Kitchen Notes</p>
-            <h3 class="h6 mb-2">From my kitchen</h3>
-            <p class="text-muted small mb-3">
-                A few dishes I cooked and want to remember.
-            </p>
-        </div>
-        <ul class="artifact-list">
-            {% for artifact in artifacts %}
-            <li class="artifact-item">
-                <div class="artifact-title">{{ artifact.title }}</div>
-                <div class="artifact-meta text-muted small">{{ artifact.meta }}</div>
-                <p class="artifact-detail mb-0">{{ artifact.detail }}</p>
-                {% if artifact.image %}
-                <div class="artifact-media">
-                    <img
-                        src="{{ url_for('static', filename=artifact.image) }}"
-                        alt="{{ artifact.image_alt or artifact.title }}"
-                        class="is-expandable"
-                        data-expandable
-                        data-expandable-caption="{{ artifact.title }}"
-                    />
-                </div>
-                {% elif artifact.image_slot %}
-                <div class="artifact-media artifact-media-placeholder">Add a food photo</div>
-                {% endif %}
-                {% if artifact.links %}
-                <div class="artifact-links">
-                    {% for link in artifact.links %}
+        <div class="artifact-panel-scroll" data-artifact-scrollable>
+            <div class="artifact-header">
+                <p class="kitchen-label text-uppercase fw-semibold small mb-1">Kitchen Notes</p>
+                <h3 class="h6 mb-2">From my kitchen</h3>
+                <p class="text-muted small mb-3">
+                    A few dishes I cooked and want to remember.
+                </p>
+            </div>
+            <ul class="artifact-list">
+                {% for artifact in artifacts %}
+                <li class="artifact-item">
+                    <div class="artifact-title">{{ artifact.title }}</div>
+                    <div class="artifact-meta text-muted small">{{ artifact.meta }}</div>
+                    <p class="artifact-detail mb-0">{{ artifact.detail }}</p>
+                    {% if artifact.image %}
+                    <div class="artifact-media">
+                        <img
+                            src="{{ url_for('static', filename=artifact.image) }}"
+                            alt="{{ artifact.image_alt or artifact.title }}"
+                            class="is-expandable"
+                            data-expandable
+                            data-expandable-caption="{{ artifact.title }}"
+                        />
+                    </div>
+                    {% elif artifact.image_slot %}
+                    <div class="artifact-media artifact-media-placeholder">Add a food photo</div>
+                    {% endif %}
+                    {% if artifact.links %}
+                    <div class="artifact-links">
+                        {% for link in artifact.links %}
+                        <a
+                            class="artifact-link"
+                            href="{{ link.url }}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            {{ link.label }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                    {% elif artifact.link %}
                     <a
                         class="artifact-link"
-                        href="{{ link.url }}"
+                        href="{{ artifact.link }}"
                         target="_blank"
                         rel="noopener"
                     >
-                        {{ link.label }}
+                        View
                     </a>
-                    {% endfor %}
-                </div>
-                {% elif artifact.link %}
-                <a
-                    class="artifact-link"
-                    href="{{ artifact.link }}"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    View
-                </a>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="artifact-scrollbar" data-artifact-scroll-track aria-hidden="true">
+            <div class="artifact-scrollbar-thumb" data-artifact-scroll-thumb></div>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -11,7 +11,7 @@ PORTFOLIO = {
         "photo": "images/profile.png",
         "resume_static_path": "documents/resume-placeholder.pdf",
         "email": "grant.hur@students.asdrp.org",
-        "phone": "(555) 123-4567",
+        "phone": "408-422-1114",
         "socials": {
             "GitHub": "https://github.com/gran4",
             "ASDRP GitHub": "https://github.com/Grant-Hur-asdrp-account",

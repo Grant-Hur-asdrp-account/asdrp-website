@@ -192,9 +192,86 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const toggle = drawer.querySelector("[data-artifact-toggle]");
         const panel = drawer.querySelector("[data-artifact-panel]");
-        if (!toggle || !panel) {
+        const scrollContainer = drawer.querySelector("[data-artifact-scrollable]");
+        const scrollTrack = drawer.querySelector("[data-artifact-scroll-track]");
+        const scrollThumb = drawer.querySelector("[data-artifact-scroll-thumb]");
+        const scroller = scrollContainer || panel;
+        if (!toggle || !panel || !scroller) {
             return;
         }
+
+        const clampValue = (value, min, max) => Math.min(max, Math.max(min, value));
+
+        const getScrollMetrics = () => {
+            if (!scrollTrack || !scrollThumb) {
+                return null;
+            }
+
+            const trackHeight = scrollTrack.clientHeight;
+            if (trackHeight <= 0) {
+                return null;
+            }
+
+            const maxScroll = Math.max(0, scroller.scrollHeight - scroller.clientHeight);
+            const minThumbHeight = 26;
+            const fallbackThumbHeight = Math.min(
+                trackHeight,
+                Math.max(minThumbHeight, trackHeight * 0.35)
+            );
+            const thumbHeight =
+                maxScroll <= 1
+                    ? fallbackThumbHeight
+                    : Math.max(
+                          minThumbHeight,
+                          (scroller.clientHeight / scroller.scrollHeight) * trackHeight
+                      );
+            const thumbTravel = Math.max(0, trackHeight - thumbHeight);
+
+            return {
+                trackHeight,
+                maxScroll,
+                thumbHeight,
+                thumbTravel,
+            };
+        };
+
+        const syncScrollIndicator = () => {
+            const metrics = getScrollMetrics();
+            if (!metrics || !scrollThumb) {
+                return;
+            }
+
+            if (metrics.maxScroll <= 1 || metrics.thumbTravel <= 0) {
+                scrollThumb.style.height = `${metrics.thumbHeight}px`;
+                scrollThumb.style.transform = "translateY(0)";
+                scrollThumb.style.opacity = "0.45";
+                return;
+            }
+
+            const scrollRatio = clampValue(scroller.scrollTop / metrics.maxScroll, 0, 1);
+            const thumbTop = metrics.thumbTravel * scrollRatio;
+            scrollThumb.style.height = `${metrics.thumbHeight}px`;
+            scrollThumb.style.transform = `translateY(${thumbTop}px)`;
+            scrollThumb.style.opacity = "1";
+        };
+
+        const setScrollFromThumbTop = (rawThumbTop) => {
+            const metrics = getScrollMetrics();
+            if (!metrics) {
+                return;
+            }
+
+            const thumbTop = clampValue(rawThumbTop, 0, metrics.thumbTravel);
+            if (metrics.maxScroll <= 1 || metrics.thumbTravel <= 0) {
+                scroller.scrollTop = 0;
+                syncScrollIndicator();
+                return;
+            }
+
+            const scrollRatio = thumbTop / metrics.thumbTravel;
+            scroller.scrollTop = scrollRatio * metrics.maxScroll;
+            syncScrollIndicator();
+        };
 
         const setOpen = (open) => {
             drawer.classList.toggle("is-open", open);
@@ -202,14 +279,136 @@ document.addEventListener("DOMContentLoaded", () => {
             panel.setAttribute("aria-hidden", open ? "false" : "true");
             if (open) {
                 panel.focus({ preventScroll: true });
+                window.requestAnimationFrame(syncScrollIndicator);
             }
         };
 
+        let syncRaf = null;
+        const runSyncLoop = () => {
+            syncScrollIndicator();
+            if (!drawer.classList.contains("is-open")) {
+                syncRaf = null;
+                return;
+            }
+            syncRaf = window.requestAnimationFrame(runSyncLoop);
+        };
+        const startSyncLoop = () => {
+            if (syncRaf !== null) {
+                return;
+            }
+            syncRaf = window.requestAnimationFrame(runSyncLoop);
+        };
+        const stopSyncLoop = () => {
+            if (syncRaf === null) {
+                return;
+            }
+            window.cancelAnimationFrame(syncRaf);
+            syncRaf = null;
+        };
+
+        let dragState = null;
+        const isPrimaryPointerDown = (event) =>
+            event.pointerType !== "mouse" || event.button === 0;
+        const stopDrag = () => {
+            if (!dragState) {
+                return;
+            }
+            dragState = null;
+            drawer.classList.remove("is-dragging-scroll");
+            if (scrollThumb) {
+                scrollThumb.classList.remove("is-dragging");
+            }
+            window.removeEventListener("pointermove", handleDragMove);
+            window.removeEventListener("pointerup", handleDragEnd);
+            window.removeEventListener("pointercancel", handleDragEnd);
+        };
+        const handleDragMove = (event) => {
+            if (!dragState || !scrollTrack) {
+                return;
+            }
+            if (event.pointerId !== dragState.pointerId) {
+                return;
+            }
+            const trackRect = scrollTrack.getBoundingClientRect();
+            const thumbTop = event.clientY - trackRect.top - dragState.offsetY;
+            setScrollFromThumbTop(thumbTop);
+            event.preventDefault();
+        };
+        const handleDragEnd = (event) => {
+            if (!dragState) {
+                return;
+            }
+            if (event && event.pointerId !== dragState.pointerId) {
+                return;
+            }
+            stopDrag();
+        };
+        const startDrag = (event, offsetY) => {
+            if (!scrollTrack || !scrollThumb) {
+                return;
+            }
+            dragState = { pointerId: event.pointerId, offsetY };
+            drawer.classList.add("is-dragging-scroll");
+            scrollThumb.classList.add("is-dragging");
+            window.addEventListener("pointermove", handleDragMove);
+            window.addEventListener("pointerup", handleDragEnd);
+            window.addEventListener("pointercancel", handleDragEnd);
+            event.preventDefault();
+        };
+
         setOpen(false);
+        syncScrollIndicator();
 
         toggle.addEventListener("click", () => {
             setOpen(!drawer.classList.contains("is-open"));
+            if (drawer.classList.contains("is-open")) {
+                startSyncLoop();
+                return;
+            }
+            stopDrag();
+            stopSyncLoop();
         });
+
+        if (scrollTrack && scrollThumb) {
+            scrollThumb.addEventListener("pointerdown", (event) => {
+                if (!isPrimaryPointerDown(event)) {
+                    return;
+                }
+                const thumbRect = scrollThumb.getBoundingClientRect();
+                const offsetY = event.clientY - thumbRect.top;
+                startDrag(event, offsetY);
+            });
+
+            scrollTrack.addEventListener("pointerdown", (event) => {
+                if (!isPrimaryPointerDown(event)) {
+                    return;
+                }
+                if (event.target === scrollThumb) {
+                    return;
+                }
+                const metrics = getScrollMetrics();
+                if (!metrics) {
+                    return;
+                }
+                const trackRect = scrollTrack.getBoundingClientRect();
+                const thumbTop = event.clientY - trackRect.top - metrics.thumbHeight / 2;
+                setScrollFromThumbTop(thumbTop);
+                startDrag(event, metrics.thumbHeight / 2);
+            });
+        }
+
+        scroller.addEventListener("scroll", syncScrollIndicator, { passive: true });
+        window.addEventListener("resize", syncScrollIndicator);
+        window.addEventListener("load", syncScrollIndicator, { once: true });
+        if (window.ResizeObserver) {
+            const observer = new ResizeObserver(syncScrollIndicator);
+            observer.observe(panel);
+            observer.observe(scroller);
+            const list = panel.querySelector(".artifact-list");
+            if (list) {
+                observer.observe(list);
+            }
+        }
 
         document.addEventListener("click", (event) => {
             if (!drawer.classList.contains("is-open")) {
@@ -219,6 +418,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             setOpen(false);
+            stopDrag();
+            stopSyncLoop();
         });
 
         document.addEventListener("keydown", (event) => {
@@ -229,6 +430,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             setOpen(false);
+            stopDrag();
+            stopSyncLoop();
             toggle.focus({ preventScroll: true });
         });
     };

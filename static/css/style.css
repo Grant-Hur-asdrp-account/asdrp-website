@@ -52,6 +52,18 @@ body {
     padding: 0.65rem;
 }
 
+.project-image-app {
+    display: block;
+    width: auto;
+    height: clamp(280px, 45vw, 420px);
+    max-width: 100%;
+    max-height: none;
+    margin: 0 auto;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: #ffffff;
+}
+
 .featured-card {
     border: 1px solid rgba(15, 23, 42, 0.12);
     box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12),
@@ -277,7 +289,7 @@ code {
     bottom: 0;
     width: min(320px, 78vw);
     max-height: 70vh;
-    padding: 1rem 1.15rem;
+    padding: 1rem 1.5rem 1rem 1.15rem;
     background: #fff7ed;
     border-radius: 1rem;
     border: 1px solid rgba(253, 186, 116, 0.6);
@@ -286,7 +298,55 @@ code {
     opacity: 0;
     pointer-events: none;
     transition: transform 0.25s ease, opacity 0.2s ease;
+    overflow: hidden;
+}
+
+.artifact-panel-scroll {
+    max-height: calc(70vh - 2rem);
+    padding-right: 0.2rem;
     overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.artifact-panel-scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.artifact-scrollbar {
+    position: absolute;
+    top: 1rem;
+    right: 0.45rem;
+    bottom: 1rem;
+    width: 8px;
+    background: rgba(253, 186, 116, 0.3);
+    border-radius: 999px;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.artifact-scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    left: 1px;
+    width: 6px;
+    min-height: 26px;
+    background: linear-gradient(180deg, #f97316, #c2410c);
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(124, 45, 18, 0.35);
+    transform: translateY(0);
+    transition: height 0.16s ease;
+    cursor: grab;
+    touch-action: none;
+}
+
+.artifact-scrollbar-thumb.is-dragging {
+    cursor: grabbing;
+}
+
+.artifact-drawer.is-dragging-scroll {
+    user-select: none;
 }
 
 .artifact-drawer.is-open .artifact-panel {
@@ -493,7 +553,25 @@ body.lightbox-open {
 
 @media (max-width: 991.98px) {
     .artifact-drawer {
-        display: none;
+        right: 0.75rem;
+        bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+        z-index: 1085;
+    }
+
+    .artifact-panel {
+        right: 0;
+        bottom: calc(100% + 0.55rem);
+        width: min(92vw, 340px);
+        max-height: 60vh;
+        transform: translateY(12px);
+    }
+
+    .artifact-panel-scroll {
+        max-height: calc(60vh - 2rem);
+    }
+
+    .artifact-drawer.is-open .artifact-panel {
+        transform: translateY(0);
     }
 
     .navbar {
