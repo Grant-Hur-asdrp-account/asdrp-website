@@ -2,6 +2,13 @@
 
 ## Current Iteration
 
+### Kitchen Notes Scrollbar + iOS Image Sizing
+- **Timeline**: Updated contact phone data to `408-422-1114`. Reworked the Kitchen Notes drawer with a persistent custom scrollbar indicator, synchronized thumb movement, and drag/track-click support. Fixed a mobile breakpoint issue so the Kitchen Notes button remains visible on smaller screens and opens in a mobile-friendly position. Increased ASDRP iOS app screenshot sizing in featured and projects views to match the larger timeline-style phone treatment, and fixed centering for the enlarged image.
+- **Thought Process**: Native scrollbars can hide on macOS, so a custom indicator was needed for consistent visibility. The custom bar also had to be interactive (not just decorative) to match user expectations. The iOS app screenshot needed special handling because phone aspect ratios look too small with default project image caps.
+- **Resources Used**: Existing drawer toggle JS/CSS, responsive breakpoint tuning in `style.css`, and prior timeline image sizing rules for phone screenshots.
+- **Challenges**: Keeping the custom scrollbar visually fixed while content scrolls required splitting the drawer into a fixed panel shell plus an inner scroller. Drag interactions needed pointer-event handling to work reliably across mouse/touch input.
+- **What I Learned**: Custom scroll UI requires both synchronization logic and real interaction support. For portrait app screenshots, dedicated per-image classes keep layouts balanced without affecting landscape media.
+
 ### Kitchen Notes + Personal Shelf + Lightbox
 - **Timeline**: Replaced the artifacts drawer content with a food-focused “Kitchen Notes” list and updated the drawer styling to warm, kitchen tones. Added a new “Personal Shelf” section for flexible cards (images or video), populated it with Civ 6, family, and ASDRP advisor notes media, and moved non-food items out of the kitchen list. Swapped the ASDRP advisor notes to an image for immediate visibility. Added a sitewide lightbox so all images expand on click, with an opt-out via `data-no-expand`.
 - **Thought Process**: I needed a clean separation between cooking content and personal snapshots, plus an easy way to add/remove cards without breaking layout. Making the lightbox global removes extra per-section wiring.
