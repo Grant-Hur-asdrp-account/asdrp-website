@@ -180,6 +180,7 @@ body {
 .timeline-scroll {
     max-height: 70vh;
     overflow: hidden;
+    padding-top: 0.5rem;
     padding-right: 1rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -193,6 +194,7 @@ body {
     .timeline-scroll {
         max-height: none;
         overflow: visible;
+        padding-top: 0.5rem;
         padding-right: 0;
     }
 }
@@ -201,6 +203,7 @@ body {
     .timeline-scroll {
         max-height: none;
         overflow: visible;
+        padding-top: 0.5rem;
         padding-right: 0;
     }
 }
