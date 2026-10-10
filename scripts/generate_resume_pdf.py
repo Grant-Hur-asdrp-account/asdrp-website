@@ -144,12 +144,12 @@ def build_pdf(output_path: Path) -> None:
 
     add_section("Education")
     add_entry(
-        title="King's Academy's PSP Program",
-        right_title="San Jose, CA",
-        subtitle="High School, 12th Grade",
-        right_subtitle="Expected May 2026",
+        title="Johns Hopkins University",
+        right_title="Baltimore, MD",
+        subtitle="B.S. Computer Science, Whiting School of Engineering",
+        right_subtitle="Expected May 2030",
         bullets=[
-            "AP Scores: Computer Science A (5), Calculus BC (5), Chemistry (5), "
+            "The King's Academy, graduated May 2026. AP scores: Computer Science A (5), Calculus BC (5), Chemistry (5), "
             "Physics 1 (5), US History (5), Government (5), Precalculus (5), "
             "Psychology (5), CSP (5), English Language (4).",
         ],
@@ -158,11 +158,11 @@ def build_pdf(output_path: Path) -> None:
     add_section("Experience")
     add_entry(
         title="ASDRP Student Researcher",
-        right_title="San Jose, CA",
-        subtitle="Applied Scientific Discovery through Research Program (ASDRP)",
-        right_subtitle="Summer after 10th Grade - Present",
+        right_title="Fremont, CA",
+        subtitle="Aspiring Scholars Directed Research Program (ASDRP)",
+        right_subtitle="",
         bullets=[
-            "Built an iOS app that centralizes ASDRP deadlines, attendance, forms, and member discovery.",
+            "Helped build an iOS app that centralizes ASDRP deadlines, attendance, forms, and member discovery.",
             "Implemented to-do and important-forms modules to provide lab-specific, due-date-driven workflows.",
             "Developed Project Deep Freezer: Raspberry Pi and OCR monitoring with PagerDuty alerts for freezer temperature risks.",
         ],
@@ -171,17 +171,17 @@ def build_pdf(output_path: Path) -> None:
         title="STEM Mentor and AP CSP Support",
         right_title="San Jose, CA",
         subtitle="King's Academy Bridge Program",
-        right_subtitle="2024 - Present",
+        right_subtitle="",
         bullets=[
-            "Mentor students in school STEM activities and support project planning and debugging.",
+            "Mentored students in school STEM activities and supported project planning and debugging.",
             "Helped teach sections of AP Computer Science Principles through Bridge.",
         ],
     )
 
     add_section("Projects")
     add_entry(
-        title="ASDRP Mobile App",
-        right_title="In Progress",
+        title="ASDRP Central",
+        right_title="",
         subtitle="Swift, Firebase Auth, Firestore",
         right_subtitle="",
         bullets=[
@@ -212,7 +212,7 @@ def build_pdf(output_path: Path) -> None:
 
     add_section("Technical Skills")
     skills_lines = [
-        "Languages: Python, Swift, Java",
+        "Languages: Python, Swift, C, C++, Java",
         "Frameworks: Flask, Firebase Auth, Firestore, PyTorch, OpenCV, EasyOCR",
         "Developer Tools: Git, GitHub, PagerDuty, Raspberry Pi",
         "Focus Areas: iOS app development, OCR monitoring, applied machine learning",

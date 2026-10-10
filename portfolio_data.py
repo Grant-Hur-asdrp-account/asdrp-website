@@ -3,10 +3,10 @@
 PORTFOLIO = {
     "personal": {
         "name": "Grant Hur",
-        "grade": "12th Grade",
-        "school": "The King's Academy",
-        "location": "San Jose, CA",
-        "bio": "Student engineer building tools for ASDRP and school labs.",
+        "grade": "First-year Computer Science Student",
+        "school": "Johns Hopkins University",
+        "location": "Baltimore, MD / San Jose, CA",
+        "bio": "Computer science student interested in AI, iOS development, and applications of computing in healthcare.",
         "tagline": "Student Researcher • Software • Design",
         "photo": "images/profile.png",
         "resume_static_path": "documents/grant-hur-resume.pdf",
@@ -15,7 +15,9 @@ PORTFOLIO = {
         "socials": {
             "GitHub": "https://github.com/gran4",
             "ASDRP GitHub": "https://github.com/Grant-Hur-asdrp-account",
-            "LinkedIn": "https://www.linkedin.com/feed/",
+            "itch.io": "https://ghur.itch.io/",
+            "Dennis Liu Research Group": "https://sites.google.com/asdrp.org/dennisliu/home",
+            "LinkedIn": "https://www.linkedin.com/in/grant-hur/",
         },
     },
     "artifacts": [
@@ -159,9 +161,9 @@ PORTFOLIO = {
     "projects": {
         "asdrp": [
             {
-                "title": "ASDRP Mobile App",
+                "title": "ASDRP Central",
                 "description": (
-                    "In-progress iOS app that centralizes ASDRP logistics (deadlines, "
+                    "An iOS app that centralizes ASDRP logistics (deadlines, "
                     "attendance, and lab updates). I cleaned up the system so the info is "
                     "organized and easy to find, and the profile explorer lets people see "
                     "other labs and members."
@@ -174,8 +176,8 @@ PORTFOLIO = {
                     "Built the profile explorer that lets students browse labs and connect like a lightweight LinkedIn.",
                 ],
                 "status_note": (
-                    "Project is ongoing. The iOS build is live for internal testing. "
-                    "Kotlin port and chatbot are planned next."
+                    "Contributed SwiftUI and Firebase features for ASDRP. "
+                    "See the research group website for current project information."
                 ),
                 "strengths": [
                     "Tailors announcements per lab, reducing noise from mass emails.",
@@ -205,7 +207,7 @@ PORTFOLIO = {
                     "Project is done. Accuracy still depends on lighting and placement."
                 ),
                 "strengths": [
-                    "Low cost—no subscriptions or vendor lock-in.",
+                    "Uses a camera to read existing displays without specialized freezer hardware.",
                     "Installs without probes or freezer modifications.",
                     "Works with most freezers by reading the native display.",
                 ],
@@ -336,9 +338,15 @@ PORTFOLIO = {
         },
         {
             "year": "12th Grade",
-            "title": "Now: ASDRP Mobile App",
-            "detail": "Leading the mobile app build with personalized tooling for ASDRP.",
+            "title": "ASDRP Central",
+            "detail": "Contributed to the mobile app with personalized tools for ASDRP.",
             "image": "images/asdrp-mobile-app.png",
+        },
+        {
+            "year": "2026",
+            "title": "Johns Hopkins University",
+            "detail": "Studying computer science; expected graduation in 2030.",
+            "image": "images/profile.png",
         },
     ],
 }
